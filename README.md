@@ -14,7 +14,7 @@ This is how to use the example:
 
 - in VSC, go to File -> Open Workspace from file.. and there open uc-sdk-hello-world/workspace.code-workspace
 
--in VSC's left corner of the lower status bar, use the green >< "Open a remote window" button and select "Reopen in container". The first time you do this, VSC lets docker create the container from scratch, so be patient.
+- in VSC's left corner of the lower status bar, use the green >< "Open a remote window" button and select "Reopen in container". The first time you do this, VSC lets docker create the container from scratch, so be patient.
 
 - in VSC use Terminal -> Run task... to select and run the following items:
 - configure openSSL
