@@ -1,0 +1,35 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "configure",
+            "type": "shell",
+            "command": "mkdir -p build && cd build && ../openssl/Configure linux-generic32 no-shared --prefix=${SDKTARGETSYSROOT}/usr --openssldir=${SDKTARGETSYSROOT}/usr/openssl --cross-compile-prefix=${OECORE_NATIVE_SYSROOT}/usr/bin/arm-dalos-linux-gnueabi/",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "make",
+            "type": "shell",
+            "command": "cd build && make",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "make install",
+            "type": "shell",
+            "command": "cd build && make install",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "make clean",
+            "type": "shell",
+            "command": "cd build && make clean",
+            "problemMatcher": [],
+            "group": "build"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${OECORE_TARGET_SYSROOT}/usr/include"
+            ],
+            "defines": [],
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-arm",
+            "compilerPath": "${OECORE_NATIVE_SYSROOT}/usr/bin/arm-dalos-linux-gnueabi/arm-dalos-linux-gnueabi-gcc",
+            "compilerArgs": [
+                "-mfpu=neon",
+                "-mfloat-abi=hard",
+                "-mcpu=cortex-a9",
+                "--sysroot=${OECORE_TARGET_SYSROOT}/usr"
+            ],
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}
