@@ -1,0 +1,62 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+// openPOWERLINK V2 stack - related tasks
+        {
+            "label": "cmake",
+            "type": "shell",
+            "command": "mkdir -p build && cd build && cmake .. -DCMAKE_INSTALL_PREFIX=${env:SDKTARGETSYSROOT}/usr -DCMAKE_STAGING_PREFIX=${env:SDKTARGETSYSROOT}/usr",
+            "problemMatcher": [],
+            "group" : "build"
+        },
+        {
+            "label": "make",
+            "type": "shell",
+            "command": "cd build && make",
+            "problemMatcher": [],
+            "group" : "build"
+        }, 
+        {
+            "label": "make clean",
+            "type": "shell",
+            "command": "cd build && make clean",
+            "problemMatcher": []
+        },
+        {
+            "label": "clean build folder",
+            "type": "shell",
+            "command": "cd build && rm -r *",
+            "problemMatcher": []
+        },
+        {
+            "label": "remote gdb server",
+            "type": "shell",
+            "command": "scp build/example root@192.168.0.101:/tmp/ && ssh root@192.168.0.101 'cd /tmp; stdbuf -i0 -o0 -e0 gdbserver :2159 example'",
+            "isBackground": true,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "Listening on port",
+                    "file": 1,
+                    "location": 2,
+                    "message": 3
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Remote debugging from host",
+                    "endsPattern": "."
+                }
+            },
+            "group": "test"
+        }
+    ]
+}
