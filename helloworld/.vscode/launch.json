@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch hello world MQTTs example",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "build/example",
+            "externalConsole": true,
+            "logging": {
+                "moduleLoad": false,
+                "trace": false,
+                "engineLogging": false
+            },
+            "miDebuggerPath": "${env:GDB}",
+            "targetArchitecture": "${env:ARCH}",
+            "miDebuggerServerAddress" : "192.168.0.101:2159",
+            "cwd": "${workspaceFolder}",
+            "MIMode": "gdb",
+            "stopAtEntry" : true,
+            "preLaunchTask" : "remote gdb server",
+            "setupCommands": [
+                {
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+                },
+                {
+                    "description": "let gdb pass SIGINT to program",
+                    "text": "handle SIGINT pass nostop",
+                    "ignoreFailures": true
+                }
+
+            ]
+        }
+    ]
+}
