@@ -17,7 +17,10 @@ RUN apt-get update && \
 
 # fetch SDK installer from server
 #TODO: replace URL of apache on this Ubuntu VM with download location on WI server
-RUN wget -nv -P/tmp 192.168.76.128/SDK-UCG-1.16.0-beta.7-debug.sh
+#RUN wget -nv -P/tmp 192.168.76.128/SDK-UCG-1.16.0-beta.7-debug.sh
+
+RUN wget -nv -P/tmp http://srvde554.weidmueller.com:8071/repository/snapshots/dalos/feature/dev-jmenzel/dalos/SDK-UCG-1.16.0-beta.7-debug.sh
+
 #RUN wget -nv -P/tmp 192.168.76.128/dalos-bleeding-glibc-x86_64-meta-toolchain-weidmueller-cortexa9hf-neon-ucg-toolchain-weidmueller-20220621075014-debug.sh
 #RUN wget -nv -P/tmp 192.168.76.128/dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9hf-neon-ucg-toolchain-weidmueller-20220525152023-debug.sh
 

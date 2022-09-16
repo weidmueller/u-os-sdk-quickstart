@@ -33,7 +33,7 @@
         {
             "label": "remote gdb server",
             "type": "shell",
-            "command": "scp build/example root@192.168.0.101:/tmp/ && ssh root@192.168.0.101 'cd /tmp; stdbuf -i0 -o0 -e0 gdbserver :2159 example'",
+            "command": "scp build/example admin@192.168.0.101:/tmp/ && ssh admin@192.168.0.101 'cd /tmp; stdbuf -i0 -o0 -e0 gdbserver :2159 example'",
             "isBackground": true,
             "presentation": {
                 "echo": true,

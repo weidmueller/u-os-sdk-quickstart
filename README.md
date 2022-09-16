@@ -18,7 +18,7 @@ This is how to use the example:
 
 - install Visual Studio Code (VSC)
 
-- install Docker
+- install Docker, see here: `https://docs.docker.com/engine/install/ubuntu/`
 
 - get the example with `git clone https://github.com/weidmueller/uc-sdk-hello-world.git`
 
