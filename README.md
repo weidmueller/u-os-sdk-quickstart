@@ -22,11 +22,13 @@ This is how to use the example:
 
 - get the example with `git clone https://github.com/weidmueller/uc-sdk-hello-world.git`
 
-- in VSC, go to File -> Open Workspace from file.. and there open uc-sdk-hello-world/workspace.code-workspace
+- get the submodules with libraries required for the example: `cd uc-sdk-hello-world && git submodule update --init --remote --rebase`
+
+- in VSC's menu, go to *File -> Open Workspace* from file.. and there open uc-sdk-hello-world/workspace.code-workspace
 
 - in VSC's left corner of the lower status bar, use the green >< "Open a remote window" button and select "Reopen in container". The first time you do this, VSC lets docker create the container from scratch, so be patient.
 
-- in VSC use Terminal -> Run task... to select and run the following items:
+- in VSC's menu, use *Terminal -> Run* task... to select and run the following items:
 - configure openSSL
 - make openSSL 
 - make install openssl
