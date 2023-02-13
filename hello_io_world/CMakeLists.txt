@@ -10,9 +10,8 @@ project(example_io VERSION 0.0.1)
 # add the executable
 add_executable(example_io main_triple.c)
 
-#SET_TARGET_PROPERTIES (example_io PROPERTIES LINK_FLAGS "-static-libgcc -static-libstdc++")
-SET_TARGET_PROPERTIES (example_io PROPERTIES LINK_FLAGS "-static")
-#target_link_libraries(example_io ${CMAKE_INSTALL_PREFIX}/lib/libc.a)
+# uncomment this to link statically, e.g. for use in docker container
+#SET_TARGET_PROPERTIES (example_io PROPERTIES LINK_FLAGS "-static")
 
 # set the C/C++ standard
 set_property(TARGET example_io PROPERTY C_STANDARD 90)
