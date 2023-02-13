@@ -68,7 +68,7 @@ void main(){
    unsigned int uiOpenSSL_version_patch = OPENSSL_version_patch();
    const char * ccOpenSSL_version_pre_release = OPENSSL_version_pre_release();
 
-   printf("Service has found OpenSSL version %d.%d.%d.%d\n",
+   printf("Service has found OpenSSL version %d.%d.%d.%s\n",
                                        uiOpenSSL_version_major, \
                                        uiOpenSSL_version_minor, \
                                        uiOpenSSL_version_patch, \

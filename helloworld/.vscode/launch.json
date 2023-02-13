@@ -5,36 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch hello world MQTTs example",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "build/example",
-            "externalConsole": true,
-            "logging": {
-                "moduleLoad": false,
-                "trace": false,
-                "engineLogging": false
-            },
-            "miDebuggerPath": "${env:GDB}",
-            "targetArchitecture": "${env:ARCH}",
-            "miDebuggerServerAddress" : "192.168.0.101:2159",
+            "type": "gdb",
+            "request": "attach",
+            "name": "helloworld",
+            "executable": "build/example_io",
+            "target": "192.168.0.101:2159",
+            "remote": true,
             "cwd": "${workspaceFolder}",
-            "MIMode": "gdb",
-            "stopAtEntry" : true,
+            "gdbpath": "${env:GDB}",
             "preLaunchTask" : "remote gdb server",
-            "setupCommands": [
-                {
-                  "description": "Enable pretty-printing for gdb",
-                  "text": "-enable-pretty-printing",
-                  "ignoreFailures": true
-                },
-                {
-                    "description": "let gdb pass SIGINT to program",
-                    "text": "handle SIGINT pass nostop",
-                    "ignoreFailures": true
-                }
-
-            ]
         }
     ]
 }
