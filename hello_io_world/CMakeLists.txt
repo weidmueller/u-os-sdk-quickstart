@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.10)
+
+SET(CMAKE_FIND_LIBRARY_SUFFIXES ".a") 
+SET(BUILD_SHARED_LIBS OFF) 
+SET(CMAKE_EXE_LINKER_FLAGS "-static") 
+
+# set the project name
+project(example_io VERSION 0.0.1)
+
+# add the executable
+add_executable(example_io main_triple.c)
+
+#SET_TARGET_PROPERTIES (example_io PROPERTIES LINK_FLAGS "-static-libgcc -static-libstdc++")
+SET_TARGET_PROPERTIES (example_io PROPERTIES LINK_FLAGS "-static")
+#target_link_libraries(example_io ${CMAKE_INSTALL_PREFIX}/lib/libc.a)
+
+# set the C/C++ standard
+set_property(TARGET example_io PROPERTY C_STANDARD 90)
+
+#define _GNU_SOURCE
+target_compile_definitions(example_io PRIVATE _GNU_SOURCE)

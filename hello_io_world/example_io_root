@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "Detmold" | sudo -S gdbserver :2159 /tmp/example_io

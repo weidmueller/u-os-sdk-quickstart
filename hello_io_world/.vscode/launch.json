@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "gdb",
+            "request": "attach",
+            "name": "hello_io_world",
+            "executable": "build/example_io",
+            "target": "192.168.0.101:2159",
+            "remote": true,
+            "cwd": "${workspaceFolder}",
+            "gdbpath": "${env:GDB}",
+            "preLaunchTask" : "remote gdb server io",
+        },
+        {
+            "type": "gdb",
+            "request": "attach",
+            "name": "hello_io_world no autostart",
+            "executable": "build/example_io",
+            "target": "192.168.0.101:2159",
+            "remote": true,
+            "cwd": "${workspaceFolder}",
+            "gdbpath": "${env:GDB}"
+        }        
+    ]
+}
