@@ -16,21 +16,27 @@ RUN apt-get update && \
         perl
 
 # fetch SDK installer from server
+#ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-weidmueller-20230112145535-debug.sh
+ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.0.0-beta.1.sh
+#ARG SDK_INSTALLER=SDK-UCG-1.16.0-beta.7-debug.sh
+
 #TODO: replace URL of apache on this Ubuntu VM with download location on WI server
+RUN wget -nv -P/tmp 192.168.76.128/$SDK_INSTALLER
 #RUN wget -nv -P/tmp 192.168.76.128/SDK-UCG-1.16.0-beta.7-debug.sh
 
-RUN wget -nv -P/tmp http://srvde554.weidmueller.com:8071/repository/snapshots/dalos/feature/dev-jmenzel/dalos/SDK-UCG-1.16.0-beta.7-debug.sh
-
-#RUN wget -nv -P/tmp 192.168.76.128/dalos-bleeding-glibc-x86_64-meta-toolchain-weidmueller-cortexa9hf-neon-ucg-toolchain-weidmueller-20220621075014-debug.sh
-#RUN wget -nv -P/tmp 192.168.76.128/dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9hf-neon-ucg-toolchain-weidmueller-20220525152023-debug.sh
-
 # set execution permission for SDK installer
-RUN chmod +x /tmp/SDK-UCG-*.sh
-#RUN chmod +x /tmp/dalos-bleeding-glibc-x86_64-meta-toolchain-weidmueller-cortexa9hf-neon-ucg-toolchain-weidmueller-*.sh
+#RUN chmod +x /tmp/SDK-UCG-*.sh
+#RUN chmod +x /tmp/SDK-UCG-1.16.0-beta.7-debug.sh
+RUN chmod +x /tmp/$SDK_INSTALLER
 
 # run SDK installer, we install to default path and say "yes" to all questions
-RUN /tmp/SDK-UCG-*.sh -y
-#RUN /tmp/dalos-bleeding-glibc-x86_64-meta-toolchain-weidmueller-cortexa9hf-neon-ucg-toolchain-weidmueller-*.sh -y
+#RUN /tmp/SDK-UCG-*.sh -y
+#RUN /tmp/SDK-UCG-1.16.0-beta.7-debug.sh -y
+RUN /tmp/$SDK_INSTALLER -y
+
+# delete the SDK installer after the sdk installation has finished.
+#RUN rm -r /tmp/SDK-UCG-1.16.0-beta.7-debug.sh
+RUN rm -r /tmp/$SDK_INSTALLER
 
 # copy our .bashrc file into the container. Inside the .bashrc we source the environment setup script of the SDK.
 COPY .bashrc /root/
