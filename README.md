@@ -1,6 +1,6 @@
-# # uc-sdk-hello-world
+# uc-sdk-hello-world
 
-# Overview:
+## Overview:
 
 This example collection demonstrates usage of the C/C++ SDK for the WI UOS on IOT-GW30 and UC20-WL2000.
 
@@ -18,7 +18,7 @@ The example collection is structured as a VSC workplace folder with four project
 
 The workplace folder also provides files that configure the build environment in a Docker container. VSC operates Docker for you to create this container and connect to it to use it as a build server.
 
-# How to prepare the build environment:
+## How to prepare the build environment:
 
 - use Ubuntu 20.04 or higher, native or in a VM, as a development environment
 
@@ -36,7 +36,7 @@ The workplace folder also provides files that configure the build environment in
 
 - in VSC's left corner of the lower status bar, use the green >< "Open a remote window" button and select "Reopen in container". The first time you do this, VSC lets docker create the container from scratch, so be patient.
 
-# For the helloworld example:
+## For the helloworld example:
 
 - in VSC's menu, use *Terminal -> Run* task... to select and run the following items:
     - configure openSSL
@@ -48,7 +48,7 @@ The workplace folder also provides files that configure the build environment in
     
 Now, your helloworld binary is ready.
 
-# For the hello_io_world example:
+## For the hello_io_world example:
 
 - in VSC's menu, use *Terminal -> Run* task... to select and run the following items:
     - cmake hello_io_world
@@ -56,7 +56,7 @@ Now, your helloworld binary is ready.
 
 Now your hello_io_world binary is ready. 
 
-# Debugging on the target device:
+## Debugging on the target device:
 
 If you like, run a debug session on an IOT-GW30 or UC20-WL2000 with a UR20-DO16 attached to it:
 
