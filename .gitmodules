@@ -1,3 +1,8 @@
+# Copyright 2023 Weidmueller Interface GmbH & Co. KG <oss@weidmueller.com>
+# SPDX-FileCopyrightText: 2023 
+#
+# SPDX-License-Identifier: Apache-2.0
+
 [submodule "openssl/openssl"]
 	path = openssl/openssl
 	url = git://git.openssl.org/openssl.git

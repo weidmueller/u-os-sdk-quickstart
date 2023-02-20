@@ -1,0 +1,48 @@
+#!/usr/bin/bash
+
+# Copyright 2023 Weidmueller Interface GmbH & Co. KG <oss@weidmueller.com>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+COPYRIGHT="Copyright 2023 Weidmueller Interface GmbH & Co. KG <oss@weidmueller.com>"
+
+reuse addheader --copyright="$COPYRIGHT" \
+		 --license=Apache-2.0 \
+ .bashrc \
+ .devcontainer/devcontainer.json \
+ .dockerignore \
+ .gitignore \
+ .gitmodules \
+ Dockerfile \
+ README.md \
+ hello_io_world/.vscode/c_cpp_properties.json \
+ hello_io_world/.vscode/launch.json \
+ hello_io_world/.vscode/settings.json \
+ hello_io_world/.vscode/tasks.json \
+ hello_io_world/CMakeLists.txt \
+ hello_io_world/main_triple.c \
+ helloworld/.vscode/c_cpp_properties.json \
+ helloworld/.vscode/launch.json \
+ helloworld/.vscode/settings.json \
+ helloworld/.vscode/tasks.json \
+ helloworld/CMakeLists.txt \
+ helloworld/main.c \
+ mosquitto/.vscode/c_cpp_properties.json \
+ mosquitto/.vscode/settings.json \
+ mosquitto/.vscode/tasks.json \
+ openssl/.vscode/c_cpp_properties.json \
+ openssl/.vscode/settings.json \
+ openssl/.vscode/tasks.json
+
+reuse addheader --copyright="$COPYRIGHT" \
+		 --license=Apache-2.0 \
+		 --style=c \
+ workspace.code-workspace
+
+reuse addheader --copyright="$COPYRIGHT" \
+		 --license=Apache-2.0 \
+		 --style=python \
+ hello_io_world/example_io_root \
+ hello_io_world/docu \
+ reusescript
+ 

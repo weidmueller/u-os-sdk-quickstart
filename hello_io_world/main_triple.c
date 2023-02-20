@@ -1,3 +1,8 @@
+// Copyright 2023 Weidmueller Interface GmbH & Co. KG <oss@weidmueller.com>
+// SPDX-FileCopyrightText: 2023 
+//
+// SPDX-License-Identifier: Apache-2.0
+
 #include <fcntl.h>
 #include <sched.h>
 #include <stdint.h>

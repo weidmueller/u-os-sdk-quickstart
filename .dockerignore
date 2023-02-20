@@ -1,3 +1,8 @@
+# Copyright 2023 Weidmueller Interface GmbH & Co. KG <oss@weidmueller.com>
+# SPDX-FileCopyrightText: 2023 
+#
+# SPDX-License-Identifier: Apache-2.0
+
 *
 !dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9hf-neon-ucg-toolchain-weidmueller-20220428133204-debug.sh
 !dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-weidmueller-20221124101050-debug.sh
