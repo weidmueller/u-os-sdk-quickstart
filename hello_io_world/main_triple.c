@@ -17,7 +17,7 @@ const char kUioMap[] = "/sys/class/uio/uio1/maps/map0/size"; /**<This is the pat
 
 /**
  * @file main_triple.c
- * @author Dipl.-Inf. Tobias Klug
+ * @author w011346
  * @date January 23rd 2023
  * @brief A code example for UR20 I/O process data access.
  *
@@ -28,7 +28,7 @@ const char kUioMap[] = "/sys/class/uio/uio1/maps/map0/size"; /**<This is the pat
  * 
  * This example code explains the process data exchange. For information on 
  * the parametrization of the UR20 modules, please read the comments and code
- * in tools/unix_sock.py.
+ * in tools/unix_sock.py and the example_flatbuffers project.
  * 
  * The /dev/uio1 device provides the following data in the shared memory:
  * - information on the shared memory region itself in a ShmRegionInfo struct

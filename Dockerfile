@@ -20,27 +20,22 @@ RUN apt-get update && \
         openssh-client \
         perl
 
+# trigger cache invalidation to force actual reload and (re-)install of the SDK
+ARG CACHEBUST=1
+
 # fetch SDK installer from server
-#ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-weidmueller-20230112145535-debug.sh
-ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.0.0-beta.1.sh
-#ARG SDK_INSTALLER=SDK-UCG-1.16.0-beta.7-debug.sh
+ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.0.0-beta.5+snapshot.sh
 
 #TODO: replace URL of apache on this Ubuntu VM with download location on WI server
 RUN wget -nv -P/tmp 192.168.76.128/$SDK_INSTALLER
-#RUN wget -nv -P/tmp 192.168.76.128/SDK-UCG-1.16.0-beta.7-debug.sh
 
 # set execution permission for SDK installer
-#RUN chmod +x /tmp/SDK-UCG-*.sh
-#RUN chmod +x /tmp/SDK-UCG-1.16.0-beta.7-debug.sh
 RUN chmod +x /tmp/$SDK_INSTALLER
 
 # run SDK installer, we install to default path and say "yes" to all questions
-#RUN /tmp/SDK-UCG-*.sh -y
-#RUN /tmp/SDK-UCG-1.16.0-beta.7-debug.sh -y
 RUN /tmp/$SDK_INSTALLER -y
 
 # delete the SDK installer after the sdk installation has finished.
-#RUN rm -r /tmp/SDK-UCG-1.16.0-beta.7-debug.sh
 RUN rm -r /tmp/$SDK_INSTALLER
 
 # copy our .bashrc file into the container. Inside the .bashrc we source the environment setup script of the SDK.

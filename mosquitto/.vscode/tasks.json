@@ -15,14 +15,14 @@
         {
             "label": "mosquitto: make",
             "type": "shell",
-            "command": "cd build && make",
+            "command": "cd build && make -j6",
             "problemMatcher": [],
             "group" : "build"
         }, 
         {
             "label": "mosquitto: make install",
             "type": "shell",
-            "command": "cd build && make install",
+            "command": "cd build && make install -j6",
             "problemMatcher": [],
             "group" : "build"
         },
