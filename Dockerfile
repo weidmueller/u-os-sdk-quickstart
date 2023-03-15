@@ -18,6 +18,8 @@ RUN apt-get update && \
         wget \
         iputils-ping \
         openssh-client \
+        graphviz \
+        doxygen \
         perl
 
 # trigger cache invalidation to force actual reload and (re-)install of the SDK
@@ -28,6 +30,9 @@ ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neo
 
 #TODO: replace URL of apache on this Ubuntu VM with download location on WI server
 RUN wget -nv -P/tmp 192.168.76.128/$SDK_INSTALLER
+
+# get the CA certificate file for test.mosquitto.org
+RUN wget -nv -P/workspaces/uc-sdk-hello-world/helloworld https://test.mosquitto.org/ssl/mosquitto.org.crt
 
 # set execution permission for SDK installer
 RUN chmod +x /tmp/$SDK_INSTALLER

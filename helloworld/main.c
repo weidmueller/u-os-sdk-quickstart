@@ -12,6 +12,59 @@
 #include <openssl/crypto.h>
 #include <mosquitto.h>
 
+/**
+ * \mainpage Introduction
+ * 
+ * The VSC projects "helloworld", "openssl" and mosquitto together demonstrate how to use
+ * autotools- and cmake-built libraries with the UOS-SDK. Follow these build instructions: @n
+ * The helloworld code links against the mosquitto- and openssl 3.0 libraries. These are not
+ * part of the UOS-SDK installer; @n Build and install them by executing the following VSC tasks
+ * (VSC Menu: Terminal -> Run Task):
+ * - configure openSSL
+ * - make install openssl
+ * - mosquitto: cmake
+ * - mosquitto: make install
+ * 
+ * Both \e make \e install calls will install the respective libraries in the SDK's
+ * target sysroot. The call parameters for configure and cmake pass the needed
+ * information. @n
+ * Peruse the /.vscode/tasks.json folders in openssl/ and mosquitto/ to see how to
+ * run autotools configure, cmake and make via VSC project tasks.
+ * 
+ * Please find a description of what the helloworld example binary does in main.c.
+ * 
+ * \sa https://github.com/eclipse/mosquitto and https://github.com/openssl/openssl
+ */
+
+/**
+ * @file main.c
+ * @author w010174
+ * @date January 23rd 2023
+ * @brief A code example for MQTT(S) with UOS.
+ *
+ * The code queries and prints the openSSL version info of the actual openSSL version found.
+ * Then it takes the following initialization steps:
+ * - initialize the mosquitto library and create a client instance
+ * - register connect- and disconnect callback functions
+ * - start the messaging loop
+ * - set up the CA file name for MQTTS
+ * - asynchronously connect to the broker test.mosquitto.org
+ *    - do this in an endless retry loop every 5s until connected or SIGINT occurs
+ * - on connect, register our own SIGINT handler
+ * 
+ * After successful completion of these steps, the code enters a loop and publishes
+ * a test message cyclicly every 5s to a hardcoded topic until a SIGINT occurs.
+ * On SIGINT, the code takes the following shutdown steps:
+ * - disconnect from broker
+ * - wait for the disconnect confirmation
+ * - stop the messaging loop
+ * - destroy client instance
+ * - exit
+ * 
+ * While doing the cyclic publishing, the code also prints out error information if publishing
+ * failed.
+ */
+
 /* global declarations */
 bool xConnected = false;
 bool xSIGINT = false;
@@ -57,7 +110,7 @@ void signalHandler( int signum ) {
 }
 
 /* main() */
-void main(){
+int main(){
    uint8_t uiWaitSeconds = 0; /* counter for the wait-for-connect-to-broker timeout */
    libmosq_EXPORT struct mosquitto * pMosq; /* our mosquitto library */
    int32_t iMosqResult; /* results of mosquitto API function calls */
@@ -109,21 +162,27 @@ void main(){
       mosquitto_destroy(pMosq);
 
       /* leave this program. */
-      exit(1);
+      exit(-1);
    }
 
 /* set mosquitto's TLS parameters */
-/*        result = mosquitto_tls_set(pMosq, strCAfilename, \
-                                            strCAfilepath, \
-                                            strCertfileName, \
-                                            strKeyfileName,
+char* strCAfilename = "/tmp/mosquitto.org.crt";
+        iMosqResult = mosquitto_tls_set(pMosq, strCAfilename, \
+                                            NULL, \
+                                            NULL, \
+                                            NULL,
                                             NULL );
-*/
+
+if (iMosqResult != MOSQ_ERR_SUCCESS) {
+   printf("mosquitto_tls_set failed, 0x%d.\n", iMosqResult);
+   return -1;
+};
 
 lCONNECT_AGAIN: /* <-- we jump here if the connection attempt fails because there's no internet connection. */
     /* let mosquitto connect to the broker */
    printf("mosquitto_connect_async()..\n");
-   iMosqResult= mosquitto_connect_async(pMosq, "test.mosquitto.org", 1883, 10);
+//   iMosqResult= mosquitto_connect_async(pMosq, "test.mosquitto.org", 1883, 10);
+   iMosqResult= mosquitto_connect_async(pMosq, "test.mosquitto.org", 8883, 10);
 /*                           pWI_MQTT_conf->getBrokerURL().c_str(), \
                            pWI_MQTT_conf->getBrokerPort(), \
                            pWI_MQTT_conf->getuiKeepAlive()); */
@@ -143,7 +202,7 @@ lCONNECT_AGAIN: /* <-- we jump here if the connection attempt fails because ther
 
       /* leave this program */
       printf("exit(2)..\n");
-      exit(2);
+      exit(-2);
    }
 
   if (iMosqResult == MOSQ_ERR_EAI){
@@ -178,7 +237,7 @@ lCONNECT_AGAIN: /* <-- we jump here if the connection attempt fails because ther
          printf("registering the SIGINT handler..\n");
          signal(SIGINT, signalHandler);
 
-         printf("\nEntering the publish loop.");
+         printf("\nEntering the publish loop.\n");
       } else{
 
          printf("connection to broker timed out.\n");
@@ -193,7 +252,7 @@ lCONNECT_AGAIN: /* <-- we jump here if the connection attempt fails because ther
 
          /* leave this program */
          printf("exit(3)..\n");
-         exit(3);
+         exit(-3);
       }
   
       /* keep sending messages while we are connected to the broker. */
@@ -265,7 +324,7 @@ lCONNECT_AGAIN: /* <-- we jump here if the connection attempt fails because ther
             /* wait second-wise.. */
             while(uiWaitSeconds < 10){
                /* check if the mosquitto disconnect callback has cleared the global "connected" flag */
-               if (xConnected == true) {
+               if (xConnected == false) {
                   break;
                }
                sleep(1);

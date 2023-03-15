@@ -15,7 +15,8 @@
 		"ms-vscode.cpptools",
 		"ms-vscode.cmake-tools",
 		"maelvalais.autoconf",
-		"ms-vscode.cpptools-extension-pack"
+		"ms-vscode.cpptools-extension-pack",
+		"webfreak.debug"
 	],
 
 	// let VSC fire up a bash shell that reads a .bashrc from /root when the container starts up.
