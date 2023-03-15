@@ -8,15 +8,15 @@
             "type": "shell",
             "command": "mkdir -p build && cd build && cmake .. -DCMAKE_INSTALL_PREFIX=${env:SDKTARGETSYSROOT}/usr -DCMAKE_STAGING_PREFIX=${env:SDKTARGETSYSROOT}/usr",
             "problemMatcher": [],
-            "group" : "build"
+            "group": "build"
         },
         {
             "label": "make",
             "type": "shell",
             "command": "cd build && make",
             "problemMatcher": [],
-            "group" : "build"
-        }, 
+            "group": "build"
+        },
         {
             "label": "make clean",
             "type": "shell",
@@ -71,6 +71,22 @@
                 "clear": true
             },
             "group": "test"
+        },
+        {
+            "label": "doxygen",
+            "type": "shell",
+            "command": "doxygen docu",
+            "isBackground": true,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "group": "none",
+            "problemMatcher": []
         }
     ]
 }
