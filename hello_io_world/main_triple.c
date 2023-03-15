@@ -16,19 +16,12 @@ const char kUioDev[] = "/dev/uio1"; /**<This is the path and name of our UIO dev
 const char kUioMap[] = "/sys/class/uio/uio1/maps/map0/size"; /**<This is the path to our UIO device's shared memory mapping.*/
 
 /**
- * @file main_triple.c
- * @author w011346
- * @date January 23rd 2023
- * @brief A code example for UR20 I/O process data access.
- *
- * This file demonstrates access to I/O process data of UR20 modules attached
- * to a UC20-WL2000 PLC. A kernel module handles the backplane bus and exposes
+ * \mainpage Introduction
+ * 
+ * This example demonstrates access to I/O process data of UR20 modules attached
+ * to a UC20-WL2000 PLC. A kernel module handles @n the backplane bus and exposes
  * a UIO device. The data transfer to the application is via the shared memory
  * region of that UIO device. 
- * 
- * This example code explains the process data exchange. For information on 
- * the parametrization of the UR20 modules, please read the comments and code
- * in tools/unix_sock.py and the example_flatbuffers project.
  * 
  * The /dev/uio1 device provides the following data in the shared memory:
  * - information on the shared memory region itself in a ShmRegionInfo struct
@@ -38,10 +31,9 @@ const char kUioMap[] = "/sys/class/uio/uio1/maps/map0/size"; /**<This is the pat
  * - output triple buffer set
  * 
  * Each triple buffer set consists of three buffers; we conveniently represent
- * them as an array[3] of (uint8_t*). Thus we can select the read-, the write-,
- * and the available buffer via the associated buffer array index.
- * Each buffer consists of a 16 byte header and 1024 bytes of payload. For the
- * detailed layout of the shared memory region, refer to src/triple_buf_shm.h.
+ * them as an array[3] of (uint8_t*). @n Thus we can select the read-, the write-,
+ * and the available buffer via the associated buffer array index. @n There is a
+ * tabular layout of the shared memory region at the end of this text.
  *
  * The coordination with our UIO device is as follows:
  * 
@@ -54,7 +46,7 @@ const char kUioMap[] = "/sys/class/uio/uio1/maps/map0/size"; /**<This is the pat
  * 
  * Our UIO device will now pass the data to the modules.
  * 
- * To receive data from our UIO device, we check the new_data flag in in_buf;
+ * To receive data from our UIO device, we check the new_data flag in in_buf; @n
  * New data is available if it is set. To obtain these data, ..
  * - we take the lock and 
  * - exchange the read_buf index with the available_buf index and 
@@ -63,6 +55,66 @@ const char kUioMap[] = "/sys/class/uio/uio1/maps/map0/size"; /**<This is the pat
  * 
  * The new data are now in the read_buf and we can read it from there at our 
  * leisure.
+ *
+ * Please find the example code in main_triple.c.
+ * @n
+ * @n
+ * Here is a summary of the shared memory layout:
+ * |Name           |Content                 | data type    |
+ * |---------------|------------------------|--------------|
+ * |valid          |magic number 0xABCDEFAB |uint32_t      |
+ * |Input          |buffer info             |TripleBufInfo |
+ * |Output         |buffer info             |TripleBufInfo |
+ * |Input buffer 1 |header and payload      | 1040 bytes   |
+ * |Input buffer 2 |header and payload      | 1040 bytes   |
+ * |Input buffer 3 |header and payload      | 1040 bytes   |
+ * |Output buffer 1|header and payload      | 1040 bytes   |
+ * |Output buffer 2|header and payload      | 1040 bytes   |
+ * |Output buffer 3|header and payload      | 1040 bytes   |
+ *
+ * Each buffer has a 16 byte header and 1024 byte
+ * payload. The first 2 byte in the header is the
+ * offset to the start of process data within the buffer.
+ * 
+ * Accordingly, the buffer layout is:
+ * |Name           |Content                    | data type  |
+ * |---------------|---------------------------|------------|
+ * |header         |process data offset        |uint16_t    |
+ * |^              |unused                     | 14 bytes   |
+ * |payload        |depends on attached modules| 1024 bytes |
+ *
+ * The layout of the process data depends on the type and order of the UR20 modules
+ * attached to the PLC. Please refer to the UR20 manual for the related info on
+ * each module type.
+ *  
+ * For information on the parametrization of the UR20 modules, please refer to
+ * the examples in the station_configuration folder.
+ *  
+ */
+
+/**
+ * @file main_triple.c
+ * @author w011346
+ * @date January 23rd 2023
+ * @brief A code example for UR20 I/O process data access.
+ *
+ * The code takes the following initialisation steps:
+ * - map UIO1's shared memory into its own address space
+ * - makes some changes to the scheduling policy and -priority and CPU affinity
+ * - lock its memory against beeing swapped out
+ * - initialize time keeping for cyclic process data exchange
+ *
+ * After these preparations, the code cyclicly..
+ * - increments a counter,
+ * - writes the counter to the process output data,
+ * - checks for new process input data,
+ * - reads new process data if any are available,
+ * - waits until the rest of the cycle has expired.
+ * 
+ * The code also shows how to unmap the shared memory and close the file
+ * descriptor to UIO1. @n The example as is never executes this because the
+ * cyclic loop is endless. Try to extend @n the code to detect a rising edge on
+ * a digital input as an exit trigger. ;)
  */
 
 /**
@@ -439,6 +491,6 @@ memory.
     printf("close failed!\n");
     exit(1);
   }
-  
+  printf("shutdown complete.\n");
   return 0;
 }
