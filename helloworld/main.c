@@ -39,37 +39,24 @@
 /**
  * @file main.c
  * @author w010174
- * @date January 23rd 2023
- * @brief A code example for MQTT(S) with UOS.
+ * @date March 15th 2023
+ * @brief A code example for MQTTS with UOS.
  *
- * The code queries and prints the openSSL version info of the actual openSSL version found.
- * Then it takes the following initialization steps:
- * - initialize the mosquitto library and create a client instance
- * - register connect- and disconnect callback functions
- * - start the messaging loop
- * - set up the CA file name for MQTTS
- * - asynchronously connect to the broker test.mosquitto.org
- *    - do this in an endless retry loop every 5s until connected or SIGINT occurs
- * - on connect, register our own SIGINT handler
+ * The example initializes itself as MQTTS client, connects to a broker and publishes cyclicly
+ * until a SIGINT occurs. Then it disconnects from the broker and shuts down.
  * 
- * After successful completion of these steps, the code enters a loop and publishes
- * a test message cyclicly every 5s to a hardcoded topic until a SIGINT occurs.
- * On SIGINT, the code takes the following shutdown steps:
- * - disconnect from broker
- * - wait for the disconnect confirmation
- * - stop the messaging loop
- * - destroy client instance
- * - exit
- * 
- * While doing the cyclic publishing, the code also prints out error information if publishing
- * failed.
  */
 
 /* global declarations */
 bool xConnected = false;
 bool xSIGINT = false;
 
-/* mosquitto callback: on connect */
+/**
+ * @brief mosquitto's "on connect" callback function
+ * 
+ * Informs the user of a successful (re)connection to the MQTT(S) broker and
+ * sets xConnected.
+ */
 void callback_on_connect(struct mosquitto * mosq, void * obj, int rc){
 
    printf("callback on connect: rc is 0x%x.\n", rc);
@@ -78,7 +65,12 @@ void callback_on_connect(struct mosquitto * mosq, void * obj, int rc){
    xConnected = true;
 }
 
-/* mosquitto callback: on disconnect */
+/**
+ * @brief mosquitto's "on disconnect" callback function
+ * 
+ * Informs the user of an intentional or unintentional disconnect from the MQTT(S) broker.
+ * Clears xConnected.
+ */
 void callback_on_disconnect(struct mosquitto * mosq, void * obj, int rc){
 
    printf( "callback on disconnect: rc is 0x%x.\n", rc);
@@ -100,7 +92,11 @@ void callback_on_disconnect(struct mosquitto * mosq, void * obj, int rc){
 
 }
 
-/* a simple SIGINT signal handler */
+/**
+ * @brief a simple SIGINT signal handler 
+ * 
+ * Informs the user of an incoming SIGINT and sets xSIGINT.
+ */
 void signalHandler( int signum ) {
 
    printf( "Interrupt signal ( 0x%x ) received.\n",signum);
@@ -109,7 +105,33 @@ void signalHandler( int signum ) {
    xSIGINT = true;
 }
 
-/* main() */
+/**
+ * @brief The example's main code.
+ * 
+ * It queries and prints the openSSL version info of the actual openSSL version found.
+ * Then it takes the following initialization steps:
+ * - initialize the mosquitto library and create a client instance
+ * - register connect- and disconnect callback functions
+ * - start the messaging loop
+ * - set up the CA file name for MQTTS
+ * - asynchronously connect to the broker test.mosquitto.org
+ *    - do this in an endless retry loop every 5s until connected or SIGINT occurs
+ * - on connect, register our own SIGINT handler
+ * 
+ * After successful completion of these steps, the code enters a loop and publishes
+ * a test message cyclicly every 5s to a hardcoded topic until a SIGINT occurs.
+ * On SIGINT, the code takes the following shutdown steps:
+ * - disconnect from broker
+ * - wait for the disconnect confirmation
+ * - stop the messaging loop
+ * - destroy client instance
+ * - exit
+ * 
+ * While doing the cyclic publishing, the code also prints out error information if publishing
+ * failed.
+ * 
+ * \sa https://mosquitto.org/api/files/mosquitto-h.html
+ */
 int main(){
    uint8_t uiWaitSeconds = 0; /* counter for the wait-for-connect-to-broker timeout */
    libmosq_EXPORT struct mosquitto * pMosq; /* our mosquitto library */
@@ -181,11 +203,12 @@ if (iMosqResult != MOSQ_ERR_SUCCESS) {
 lCONNECT_AGAIN: /* <-- we jump here if the connection attempt fails because there's no internet connection. */
     /* let mosquitto connect to the broker */
    printf("mosquitto_connect_async()..\n");
+
+   /* uncomment the next line for MQTT without TLS: */
 //   iMosqResult= mosquitto_connect_async(pMosq, "test.mosquitto.org", 1883, 10);
+
+   /* uncomment the next line for CA certificate based MQTTS */
    iMosqResult= mosquitto_connect_async(pMosq, "test.mosquitto.org", 8883, 10);
-/*                           pWI_MQTT_conf->getBrokerURL().c_str(), \
-                           pWI_MQTT_conf->getBrokerPort(), \
-                           pWI_MQTT_conf->getuiKeepAlive()); */
 
    /* evaluate the result of the connection attempt */
    if((iMosqResult != MOSQ_ERR_SUCCESS) && (iMosqResult != MOSQ_ERR_EAI)){
