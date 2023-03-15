@@ -52,29 +52,13 @@ VSC will run doxygen to generate a html folder in the project. Please navigate t
 
 ## Build instructions
 
-### for the helloworld example:
+- for the helloworld example, read the doxygen documentation in the html folder and build openssl and mosquitto, first.
 
-- read the doxygen documentation in the html folder, build openssl and mosquitto, first.
 - in VSC's menu, use *Terminal -> Run task...* to select and run the following items:
-    - cmake helloworld
-    - make helloworld
+    - *cmake <name of project\>*
+    - *make <name of project\>*
     
-Now, your helloworld binary is ready.
-
-### for the hello_io_world example:
-
-- in VSC's menu, use *Terminal -> Run task...* to select and run the following items:
-    - cmake hello_io_world
-    - make hello_io_world
-
-Now your hello_io_world binary is ready.
-
-### for the example_flatbuffers:
-- in VSC's menu, use *Terminal -> Run task...* to select and run the following items:
-    - cmake example_flatbuffers
-    - make example_flatbuffers
-
-Now your example_fb binary is ready.
+Now, your project binary for the repsective project is ready.
 
 ## Debugging on the target device:
 
