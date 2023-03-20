@@ -29,7 +29,8 @@ ARG CACHEBUST=1
 ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.0.0-beta.5+snapshot.sh
 
 #TODO: replace URL of apache on this Ubuntu VM with download location on WI server
-RUN wget -nv -P/tmp 192.168.76.128/$SDK_INSTALLER
+#RUN wget -nv -P/tmp 192.168.76.128/$SDK_INSTALLER
+RUN wget -nv -P/tmp https://github.com/weidmueller/uc-sdk-hello-world/releases/download/2.0.0-beta.5/dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.0.0-beta.5+snapshot.sh
 
 # get the CA certificate file for test.mosquitto.org
 RUN wget -nv -P/workspaces/uc-sdk-hello-world/helloworld https://test.mosquitto.org/ssl/mosquitto.org.crt
