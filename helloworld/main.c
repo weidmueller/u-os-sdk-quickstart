@@ -21,6 +21,7 @@
  * part of the UOS-SDK installer; @n Build and install them by executing the following VSC tasks
  * (VSC Menu: Terminal -> Run Task):
  * - configure openSSL
+ * - make openssl
  * - make install openssl
  * - mosquitto: cmake
  * - mosquitto: make install
