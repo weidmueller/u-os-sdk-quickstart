@@ -13,7 +13,7 @@
             "remote": true,
             "cwd": "${workspaceFolder}",
             "gdbpath": "${env:GDB}",
-            "preLaunchTask" : "remote gdb server io",
+            "preLaunchTask" : "remote gdb server",
         },
         {
             "type": "gdb",

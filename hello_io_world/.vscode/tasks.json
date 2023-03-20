@@ -30,7 +30,7 @@
             "problemMatcher": []
         },
         {
-            "label": "remote gdb server io",
+            "label": "remote gdb server",
             "type": "shell",
             "command": "scp build/example_io example_io_root admin@192.168.0.101:/tmp/ && ssh admin@192.168.0.101 '/tmp/example_io_root'",
             "isBackground": true,

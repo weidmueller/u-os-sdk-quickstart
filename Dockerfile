@@ -33,7 +33,8 @@ ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neo
 RUN wget -nv -P/tmp https://github.com/weidmueller/uc-sdk-hello-world/releases/download/2.0.0-beta.5/dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.0.0-beta.5+snapshot.sh
 
 # get the CA certificate file for test.mosquitto.org
-RUN wget -nv -P/workspaces/uc-sdk-hello-world/helloworld https://test.mosquitto.org/ssl/mosquitto.org.crt
+#RUN wget -nv -P/workspaces/uc-sdk-hello-world/helloworld https://test.mosquitto.org/ssl/mosquitto.org.crt
+RUN wget -nv -P/tmp https://test.mosquitto.org/ssl/mosquitto.org.crt
 
 # set execution permission for SDK installer
 RUN chmod +x /tmp/$SDK_INSTALLER
@@ -46,3 +47,4 @@ RUN rm -r /tmp/$SDK_INSTALLER
 
 # copy our .bashrc file into the container. Inside the .bashrc we source the environment setup script of the SDK.
 COPY .bashrc /root/
+

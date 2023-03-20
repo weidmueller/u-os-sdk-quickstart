@@ -75,6 +75,7 @@ Then the launch configuration starts gdbserver for a debug session of your binar
 - VSC may ask for your device's password two times. Be patient and enter both times.
 - after everything has started, observe the gdb control bar with the play, step into, step over, restart and stop buttons. 
 - press "play" and switch VSC to the terminal -> the helloworld example prints some status output to the console.
+- the download to the device may take longer than gdb's connect-to-target timeout. If you experience timeout errors, run the task "remote gdb server <name of project\>" first, then launch the debug session.
 - Some remarks regarding the hello_io_world example and example_flatbuffers:
     - these examples expect to find UOS features related to the module bus of the WL2000 PLC. Thus, it does not make sense to run them on an IOT-GW30.
     - their executables use sched_setscheduler() and some other system calls that require root priviledges. In order to provide them, the launch configuration calls a prelaunch task that copies the bash script "example_io_root" resp. "example_fb_root" to the PLC and starts the bash script via ssh. The bash script in turn calls gdbserver with sudo. For this to work properly, you must edit the bash script and fill in the password of the user "admin" on your target device.
