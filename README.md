@@ -25,7 +25,7 @@ The example "hello_io_world" demonstrates process data exchange with UR20 module
 
 The "example_flatbuffers" shows how to access the station configuration of a UC20-WL2000 and the attached UR20 modules.
 
-The workplace folder also provides files that configure the build environment in a Docker container. VSC operates Docker for you to create this container and connect to it to use it as a build server.
+The workplace folder also provides files that configure a build environment in a Docker container. VSC operates Docker for you to create this container and connect to it to use it as a build server.
 
 ## How to prepare the build environment:
 
@@ -58,7 +58,7 @@ VSC will run doxygen to generate a html folder in the project. Please navigate t
     - *cmake <name of project\>*
     - *make <name of project\>*
     
-Now, your project binary for the repsective project is ready.
+Now, your project binary for the respective project is ready.
 
 ## Debugging on the target device:
 
