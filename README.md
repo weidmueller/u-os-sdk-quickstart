@@ -10,15 +10,18 @@ SPDX-License-Identifier: Apache-2.0
 ## Overview:
 
 This example collection demonstrates usage of the C/C++ SDK for the WI UOS on IOT-GW30 and UC20-WL2000.
-It is structured as a VSC workplace folder with the following projects in it:
+
+For a basic overview and an introduction to the u-Os SDK installer, see the helloworld [README](helloworld/README.md).
+
+For more advanced examples read on about the VSC workplace folder with the following projects in it:
 
 1. openSSL 3.x
 2. mosquitto
-3. helloworld
+3. helloworld_mqtt
 4. hello_io_world
 5. example_flatbuffers
 
-The example "helloworld" uses the mosquitto MQTT(S) library and the openSSL 3.x library to connect to test.mosquitto.org. After a successful connect, the library sends a small JSON message to a hardcoded topic every 5s.
+The example "helloworld_mqtt" uses the mosquitto MQTT(S) library and the openSSL 3.x library to connect to test.mosquitto.org. After a successful connect, the library sends a small JSON message to a hardcoded topic every 5s.
 It demonstrates usage of the SDK with cmake, usage of the SDK with autotools and how to build c/c++ shared and static libraries and use them in your own c/c++ projects.
 
 The example "hello_io_world" demonstrates process data exchange with UR20 modules attached to a UC20-WL2000.
@@ -52,7 +55,7 @@ VSC will run doxygen to generate a html folder in the project. Please navigate t
 
 ## Build instructions
 
-- for the helloworld example, read the doxygen documentation in the html folder and build openssl and mosquitto, first.
+- for the helloworld_mqtt example, read the doxygen documentation in the html folder and build openssl and mosquitto, first.
 
 - in VSC's menu, use *Terminal -> Run task...* to select and run the following items:
     - *cmake <name of project\>*
@@ -64,7 +67,7 @@ Now, your project binary for the respective project is ready.
 
 If you like, run a debug session on an IOT-GW30 or UC20-WL2000 with a UR20-DO16 attached to it:
 
-Both the hello_io_world, helloworld and example_flatbuffers project in the workspace have a launch configuration that copies the binary to the remote device, namely to root@192.168.0.101/tmp.
+Both the hello_io_world, helloworld_mqtt and example_flatbuffers project in the workspace have a launch configuration that copies the binary to the remote device, namely to root@192.168.0.101/tmp.
 Then the launch configuration starts gdbserver for a debug session of your binary on the remote device and finally launches gdb for a remote debug session with VSC on your host system.
 
 - make sure that a user with the name "admin" and administrator priviledges exists on your target device and activate the SSH access via the device's web interface -> Identity and Access -> SSH access.
