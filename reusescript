@@ -15,18 +15,20 @@ reuse addheader --copyright="$COPYRIGHT" \
  .gitmodules \
  Dockerfile \
  README.md \
+ helloworld/README.md \
+ helloworld/helloworld.c \
  hello_io_world/.vscode/c_cpp_properties.json \
  hello_io_world/.vscode/launch.json \
  hello_io_world/.vscode/settings.json \
  hello_io_world/.vscode/tasks.json \
  hello_io_world/CMakeLists.txt \
  hello_io_world/main_triple.c \
- helloworld/.vscode/c_cpp_properties.json \
- helloworld/.vscode/launch.json \
- helloworld/.vscode/settings.json \
- helloworld/.vscode/tasks.json \
- helloworld/CMakeLists.txt \
- helloworld/main.c \
+ helloworld_mqtt/.vscode/c_cpp_properties.json \
+ helloworld_mqtt/.vscode/launch.json \
+ helloworld_mqtt/.vscode/settings.json \
+ helloworld_mqtt/.vscode/tasks.json \
+ helloworld_mqtt/CMakeLists.txt \
+ helloworld_mqtt/main.c \
  mosquitto/.vscode/c_cpp_properties.json \
  mosquitto/.vscode/settings.json \
  mosquitto/.vscode/tasks.json \
