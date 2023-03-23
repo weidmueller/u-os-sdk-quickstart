@@ -12,7 +12,7 @@
 			"path": "./mosquitto"
 		},
 		{
-			"path": "./helloworld"
+			"path": "./helloworld_mqtt"
 		},
 		{
 			"path": "./hello_io_world"
