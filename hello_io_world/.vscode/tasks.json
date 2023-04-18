@@ -13,7 +13,7 @@
         {
             "label": "make",
             "type": "shell",
-            "command": "cd build && make",
+            "command": "cd build && make -j",
             "problemMatcher": [],
             "group": "build"
         },
