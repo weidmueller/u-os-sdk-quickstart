@@ -355,6 +355,8 @@ lCONNECT_AGAIN: /* <-- we jump here if the connection attempt fails because ther
                /* count the seconds.. */
                uiWaitSeconds++;
             }
+            /* force end of publish while loop */
+            xConnected = false;
 
             printf("...disconnected.\n");
 
