@@ -36,7 +36,7 @@ The workplace folder also provides files that configure a build environment in a
 
 - install Visual Studio Code (VSC)
 
-- install Docker, see here: `https://docs.docker.com/engine/install/ubuntu/`
+- install Docker, see here: [install](https://docs.docker.com/engine/install/ubuntu/) and here: [postinstall](https://docs.docker.com/engine/install/linux-postinstall/)
 
 - install the Visual Studio Code Extensions "Dev Containers", "C/C++ Extension Pack" and "Native Debug" in VSC
 
