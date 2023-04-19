@@ -32,7 +32,7 @@ The workplace folder also provides files that configure a build environment in a
 
 ## How to prepare the build environment:
 
-- use Ubuntu 20.04 or higher, native or in a VM, as a development environment
+- use Ubuntu 20.04 or higher, native or in a VM, as a development environment. This requires approx. 40GB of disk space, so reserve accordingly when you create a VM.
 
 - install Visual Studio Code (VSC)
 
