@@ -40,9 +40,9 @@ The workplace folder also provides files that configure a build environment in a
 
 - install the Visual Studio Code Extensions "Dev Containers", "C/C++ Extension Pack" and "Native Debug" in VSC
 
-- get the example with `git clone https://github.com/weidmueller/uc-sdk-hello-world.git`
+- in your home folder, get the example with `git clone https://github.com/weidmueller/uc-sdk-hello-world.git`
 
-- get the submodules with libraries required for the example: `cd uc-sdk-hello-world && git submodule update --init --remote --rebase`
+- get the submodules with libraries required for the example: `cd ~/uc-sdk-hello-world && git submodule update --init --remote --rebase`
 
 - in VSC's menu, go to *File -> Open Workspace from file..* and there open uc-sdk-hello-world/workspace.code-workspace
 
@@ -58,17 +58,20 @@ VSC will run doxygen to generate a html folder in the project. Please navigate t
 - for the helloworld_mqtt example, read the doxygen documentation in the html folder and build openssl and mosquitto, first.
 
 - in VSC's menu, use *Terminal -> Run task...* to select and run the following items:
-    - *cmake <name of project\>*
+    - *cmake <name of project\>* or *configure <name of project\>*, depending on the project
     - *make <name of project\>*
     
 Now, your project binary for the respective project is ready.
+
+NB: Some projects depend on each other. You need to build openSSL first, then mosquitto and then helloworld_mqtt. Run *make install <name of project\>* in between.
 
 ## Debugging on the target device:
 
 If you like, run a debug session on an IOT-GW30 or UC20-WL2000 with a UR20-DO16 attached to it:
 
 Both the hello_io_world, helloworld_mqtt and example_flatbuffers project in the workspace have a launch configuration that copies the binary to the remote device, namely to root@192.168.0.101/tmp.
-Then the launch configuration starts gdbserver for a debug session of your binary on the remote device and finally launches gdb for a remote debug session with VSC on your host system.
+Then the launch configuration starts gdbserver for a debug session of your binary on the remote device and finally launches gdb for a remote debug session with VSC on your host system. If your target's
+ip address is not 192.168.0.101, you need to change the target ip adress in the files launch.json and tasks.json in the .vscode folders in the related projects.
 
 - make sure that a user with the name "admin" and administrator priviledges exists on your target device and activate the SSH access via the device's web interface -> Identity and Access -> SSH access.
 - if you do this for the first time, run `ssh admin@192.168.0.101` in a VSC terminal before you start any launch configuration. Hit 'yes' when ssh asks about the unknown certificate, then exit the ssh connection, again.
