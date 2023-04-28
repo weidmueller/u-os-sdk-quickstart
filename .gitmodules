@@ -5,7 +5,7 @@
 
 [submodule "openssl/openssl"]
 	path = openssl/openssl
-	url = https://git.openssl.org/openssl.git
+	url = https://github.com/openssl/openssl.git
 	branch = master
 [submodule "mosquitto/mosquitto"]
 	path = mosquitto/mosquitto
