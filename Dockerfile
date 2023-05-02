@@ -11,7 +11,7 @@ ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="none"
 
 # install some packages needed to set up the container and the dalos SDK in the container
 RUN apt-get update && \
-    apt-get install -y \
+    apt-get install -y sudo \
         make \
         xz-utils \
         python \
@@ -20,13 +20,19 @@ RUN apt-get update && \
         openssh-client \
         graphviz \
         doxygen \
-        perl
+        perl && \
+    useradd --create-home --shell /bin/bash buildx && \
+    echo "buildx:buildx" | chpasswd && adduser buildx sudo
 
 # trigger cache invalidation to force actual reload and (re-)install of the SDK
 ARG CACHEBUST=1
 
 # fetch SDK installer from server
 ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.0.0-beta.5+snapshot.sh
+#ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.0.0+snapshot.sh
+
+USER buildx
+WORKDIR /home/buildx
 
 #TODO: replace URL of apache on this Ubuntu VM with download location on WI server
 #RUN wget -nv -P/tmp 192.168.76.128/$SDK_INSTALLER
@@ -40,11 +46,11 @@ RUN wget -nv -P/tmp https://test.mosquitto.org/ssl/mosquitto.org.crt
 RUN chmod +x /tmp/$SDK_INSTALLER
 
 # run SDK installer, we install to default path and say "yes" to all questions
-RUN /tmp/$SDK_INSTALLER -y
+RUN /tmp/$SDK_INSTALLER -y -d /home/buildx
 
 # delete the SDK installer after the sdk installation has finished.
 RUN rm -r /tmp/$SDK_INSTALLER
 
-# copy our .bashrc file into the container. Inside the .bashrc we source the environment setup script of the SDK.
-COPY .bashrc /root/
-
+# the .bashrc of user buildx we source the environment setup script of the SDK.
+#RUN echo "\n#initialize SDK environment variables\nsource /opt/dalos*/2.0.0*/env*\n" >> /home/buildx/.bashrc
+RUN echo "\n#initialize SDK environment variables\nsource /home/buildx/env*\n" >> /home/buildx/.bashrc

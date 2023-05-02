@@ -19,6 +19,8 @@
 		"webfreak.debug"
 	],
 
+	"remoteUser": "buildx",
+
 	// let VSC fire up a bash shell that reads a .bashrc from /root when the container starts up.
-	"userEnvProbe": "loginInteractiveShell"
+	"userEnvProbe": "loginInteractiveShell",
 }
