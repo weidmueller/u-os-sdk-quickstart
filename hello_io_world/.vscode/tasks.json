@@ -32,7 +32,7 @@
         {
             "label": "remote gdb server",
             "type": "shell",
-            "command": "scp build/example_io example_io_root admin@192.168.0.101:/tmp/ && ssh admin@192.168.0.101 '/tmp/example_io_root'",
+            "command": "scp build/example_io example_io_root ${env:SDKTARGETSYSROOT}/usr/bin/gdbserver admin@${config:target_ip_address}:/tmp/ && ssh admin@${config:target_ip_address} '/tmp/example_io_root'",
             "isBackground": true,
             "presentation": {
                 "echo": true,
@@ -60,7 +60,7 @@
         {
             "label": "copy example io to target",
             "type": "shell",
-            "command": "scp build/example_io admin@192.168.0.101:/tmp",
+            "command": "scp build/example_io admin@${config:target_ip_address}:/tmp",
             "isBackground": true,
             "presentation": {
                 "echo": true,

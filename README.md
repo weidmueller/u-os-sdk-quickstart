@@ -46,7 +46,7 @@ The workplace folder also provides files that configure a build environment in a
 
 - in VSC's menu, go to *File -> Open Workspace from file..* and there open uc-sdk-hello-world/workspace.code-workspace
 
-- in VSC's left corner of the lower status bar, use the green >< "Open a remote window" button and select "Reopen in container". The first time you do this, VSC lets docker create the container from scratch, so be patient.
+- in VSC's left corner of the lower status bar, use the green >< "Open a remote window" button and select "Reopen in container". The first time you do this, VSC lets docker create the container from scratch, so be patient. Hint: in the container, your user is buildx with the sudo password buildx.
 
 ## Documentation
 Each project has doxygen documentation that explains it from a higher level down to the details. 
@@ -67,14 +67,15 @@ NB: Some projects depend on each other. You need to build openSSL first, then mo
 
 ## Debugging on the target device:
 
+NB: For simplicity, the following paragraph assumes that your target's ip address is 192.168.0.101. Please update the settings.json file in the projects you want to debug with your target's actual ip address before you try to launch a debug configuration.
+
 If you like, run a debug session on an IOT-GW30 or UC20-WL2000 with a UR20-DO16 attached to it:
 
-Both the hello_io_world, helloworld_mqtt and example_flatbuffers project in the workspace have a launch configuration that copies the binary to the remote device, namely to root@192.168.0.101/tmp.
-Then the launch configuration starts gdbserver for a debug session of your binary on the remote device and finally launches gdb for a remote debug session with VSC on your host system. If your target's
-ip address is not 192.168.0.101, you need to change the target ip adress in the files launch.json and tasks.json in the .vscode folders in the related projects.
+Both the hello_io_world, helloworld_mqtt and example_flatbuffers project in the workspace have a launch configuration that copies the binary to the remote device, namely to admin@192.168.0.101/tmp.
+Then the launch configuration starts gdbserver for a debug session of your binary on the remote device and finally launches gdb for a remote debug session with VSC on your host system.
 
 - make sure that a user with the name "admin" and administrator priviledges exists on your target device and activate the SSH access via the device's web interface -> Identity and Access -> SSH access.
-- if you do this for the first time, run `ssh admin@192.168.0.101` in a VSC terminal before you start any launch configuration. Hit 'yes' when ssh asks about the unknown certificate, then exit the ssh connection, again.
+- if you do this for the first time, run `ssh admin@<your target's ip address>` in a VSC terminal before you start any launch configuration. Hit 'yes' when ssh asks about the unknown certificate, then exit the ssh connection, again.
 - hit Ctrl-Shift-D or View->Run for the Run-and-Debug view of VSC. Then find the "Launch" dropdown list near the left end of the bar below the menu bar.
     - select the project you want to debug.
 - in VSC, go to Run -> Start Debugging

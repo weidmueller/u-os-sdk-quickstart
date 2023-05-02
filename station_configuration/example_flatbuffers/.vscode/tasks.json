@@ -32,7 +32,7 @@
         {
             "label": "remote gdb server",
             "type": "shell",
-            "command": "scp build/example_fb api/interface.fbs example_fb_root admin@192.168.0.101:/tmp/ && ssh admin@192.168.0.101 '/tmp/example_fb_root'",
+            "command": "scp build/example_fb api/interface.fbs example_fb_root ${env:SDKTARGETSYSROOT}/usr/bin/gdbserver admin@${config:target_ip_address}:/tmp/ && ssh admin@${config:target_ip_address} '/tmp/example_fb_root'",
             "isBackground": true,
             "presentation": {
                 "echo": true,
