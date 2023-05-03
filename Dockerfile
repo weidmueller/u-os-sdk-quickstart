@@ -36,10 +36,9 @@ WORKDIR /home/buildx
 
 #TODO: replace URL of apache on this Ubuntu VM with download location on WI server
 #RUN wget -nv -P/tmp 192.168.76.128/$SDK_INSTALLER
-RUN wget -nv -P/tmp https://github.com/weidmueller/uc-sdk-hello-world/releases/download/2.0.0-beta.5/dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.0.0-beta.5+snapshot.sh
+RUN wget -nv -P/tmp https://github.com/weidmueller/uc-sdk-hello-world/releases/download/2.0.0-beta.5/$SDK_INSTALLER
 
 # get the CA certificate file for test.mosquitto.org
-#RUN wget -nv -P/workspaces/uc-sdk-hello-world/helloworld https://test.mosquitto.org/ssl/mosquitto.org.crt
 RUN wget -nv -P/tmp https://test.mosquitto.org/ssl/mosquitto.org.crt
 
 # set execution permission for SDK installer
@@ -52,5 +51,5 @@ RUN /tmp/$SDK_INSTALLER -y -d /home/buildx
 RUN rm -r /tmp/$SDK_INSTALLER
 
 # the .bashrc of user buildx we source the environment setup script of the SDK.
-#RUN echo "\n#initialize SDK environment variables\nsource /opt/dalos*/2.0.0*/env*\n" >> /home/buildx/.bashrc
 RUN echo "\n#initialize SDK environment variables\nsource /home/buildx/env*\n" >> /home/buildx/.bashrc
+
