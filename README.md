@@ -40,11 +40,11 @@ The workplace folder also provides files that configure a build environment in a
 
 - install the Visual Studio Code Extensions "Dev Containers", "C/C++ Extension Pack" and "Native Debug" in VSC
 
-- in your home folder, get the example with `git clone https://github.com/weidmueller/uc-sdk-hello-world.git`
+- in your home folder, get the example with `git clone https://github.com/weidmueller/u-os-sdk-quickstart.git`
 
-- get the submodules with libraries required for the example: `cd ~/uc-sdk-hello-world && git submodule update --init --remote --rebase`
+- get the submodules with libraries required for the example: `cd ~/u-os-sdk-quickstart && git submodule update --init --remote --rebase`
 
-- in VSC's menu, go to *File -> Open Workspace from file..* and there open uc-sdk-hello-world/workspace.code-workspace
+- in VSC's menu, go to *File -> Open Workspace from file..* and there open u-os-sdk-quickstart/workspace.code-workspace
 
 - in VSC's left corner of the lower status bar, use the green >< "Open a remote window" button and select "Reopen in container". The first time you do this, VSC lets docker create the container from scratch, so be patient. Hint: in the container, your user is buildx with the sudo password buildx.
 
