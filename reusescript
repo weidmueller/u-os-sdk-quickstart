@@ -8,7 +8,6 @@ COPYRIGHT="Copyright 2023 Weidmueller Interface GmbH & Co. KG <oss@weidmueller.c
 
 reuse addheader --copyright="$COPYRIGHT" \
 		 --license=Apache-2.0 \
- .bashrc \
  .devcontainer/devcontainer.json \
  .dockerignore \
  .gitignore \
@@ -17,12 +16,6 @@ reuse addheader --copyright="$COPYRIGHT" \
  README.md \
  helloworld/README.md \
  helloworld/helloworld.c \
- hello_io_world/.vscode/c_cpp_properties.json \
- hello_io_world/.vscode/launch.json \
- hello_io_world/.vscode/settings.json \
- hello_io_world/.vscode/tasks.json \
- hello_io_world/CMakeLists.txt \
- hello_io_world/main_triple.c \
  helloworld_mqtt/.vscode/c_cpp_properties.json \
  helloworld_mqtt/.vscode/launch.json \
  helloworld_mqtt/.vscode/settings.json \
@@ -35,44 +28,14 @@ reuse addheader --copyright="$COPYRIGHT" \
  openssl/.vscode/c_cpp_properties.json \
  openssl/.vscode/settings.json \
  openssl/.vscode/tasks.json \
- station_configuration/example_flatbuffers/.vscode/c_cpp_properties.json \
- station_configuration/example_flatbuffers/.vscode/launch.json \
- station_configuration/example_flatbuffers/.vscode/settings.json \
- station_configuration/example_flatbuffers/.vscode/tasks.json \
- station_configuration/example_flatbuffers/api/CMakeLists.txt \
- station_configuration/example_flatbuffers/include/buildDeployRequest.h \
- station_configuration/example_flatbuffers/include/buildGetDeviceStateRequest.h \
- station_configuration/example_flatbuffers/include/prepareRequestFromJSON.h \
- station_configuration/example_flatbuffers/include/printBuffer.h \
- station_configuration/example_flatbuffers/include/printByteVect.h \
- station_configuration/example_flatbuffers/include/requestsJSON.h \
- station_configuration/example_flatbuffers/include/responseToAccessors.h \
- station_configuration/example_flatbuffers/include/responseToJSON.h \
- station_configuration/example_flatbuffers/include/transceive.h \
- station_configuration/example_flatbuffers/buildDeployRequest.cpp \
- station_configuration/example_flatbuffers/buildGetDeviceStateRequest.cpp \
- station_configuration/example_flatbuffers/CMakeLists.txt \
- station_configuration/example_flatbuffers/main.cpp \
- station_configuration/example_flatbuffers/prepareRequestFromJSON.cpp \
- station_configuration/example_flatbuffers/printBuffer.cpp \
- station_configuration/example_flatbuffers/printByteVect.cpp \
- station_configuration/example_flatbuffers/responseToAccessors.cpp \
- station_configuration/example_flatbuffers/responseToJSON.cpp \
- station_configuration/example_flatbuffers/transceive.cpp
 
 reuse addheader --copyright="$COPYRIGHT" \
 		 --license=Apache-2.0 \
 		 --style=c \
- workspace.code-workspace \
-  station_configuration/example_flatbuffers/api/interface.fbs
+ workspace.code-workspace
 
 reuse addheader --copyright="$COPYRIGHT" \
 		 --license=Apache-2.0 \
 		 --style=python \
- hello_io_world/example_io_root \
-  station_configuration/example_flatbuffers/example_fb_root \
- hello_io_world/docu \
- station_configuration/example_flatbuffers/docu \
- station_configuration/example_JSON/unix_sock.py \
  reusescript
  
