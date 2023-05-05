@@ -13,12 +13,6 @@
 		},
 		{
 			"path": "./helloworld_mqtt"
-		},
-		{
-			"path": "./hello_io_world"
-		},
-		{
-			"path": "./station_configuration/example_flatbuffers"
 		}
 	],
 	"settings": {
