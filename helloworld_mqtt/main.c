@@ -15,9 +15,9 @@
 /**
  * \mainpage Introduction
  * 
- * The VSC projects "helloworld", "openssl" and mosquitto together demonstrate how to use
+ * The VSC projects "helloworld_mqtt", "openssl" and "mosquitto" together demonstrate how to use
  * autotools- and cmake-built libraries with the UOS-SDK. Follow these build instructions: @n
- * The helloworld code links against the mosquitto- and openssl 3.0 libraries. These are not
+ * The helloworld_mqtt code links against the mosquitto- and openssl 3.0 libraries. These are not
  * part of the UOS-SDK installer; @n Build and install them by executing the following VSC tasks
  * (VSC Menu: Terminal -> Run Task):
  * - configure openSSL
@@ -29,10 +29,14 @@
  * Both \e make \e install calls will install the respective libraries in the SDK's
  * target sysroot. The call parameters for configure and cmake pass the needed
  * information. @n
- * Peruse the /.vscode/tasks.json folders in openssl/ and mosquitto/ to see how to
+ * Next, execute the following VSC tasks to configure and build helloworld_mqtt:
+ * - cmake helloworld_mqtt
+ * - make helloworld_mqtt
+ * 
+ * Peruse the /.vscode/tasks.json files in openssl/, mosquitto/ and helloworld_mqtt/ to see how to
  * run autotools configure, cmake and make via VSC project tasks.
  * 
- * Please find a description of what the helloworld example binary does in main.c.
+ * Please find a description of what the helloworld_mqtt example binary does in main.c.
  * 
  * \sa https://github.com/eclipse/mosquitto and https://github.com/openssl/openssl
  */
