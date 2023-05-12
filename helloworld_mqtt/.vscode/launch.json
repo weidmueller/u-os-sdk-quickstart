@@ -15,7 +15,7 @@
             "cwd": "${workspaceFolder}",
             "gdbpath": "${env:GDB}",
             "preLaunchTask" : "remote gdb server",
-            "debugger_args" : ["-iex", "set remotetimeout = 120"]
+            "debugger_args" : ["-iex", "set remotetimeout 120"]
         }
     ]
 }
