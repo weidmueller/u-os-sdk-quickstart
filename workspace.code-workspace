@@ -13,7 +13,8 @@
 		},
 		{
 			"path": "./helloworld_mqtt"
-		}
+		},
+		{ "path": "./flatbuffers"}
 	],
 	"settings": {
 		"files.associations": {

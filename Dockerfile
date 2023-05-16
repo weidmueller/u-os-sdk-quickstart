@@ -10,6 +10,7 @@ ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="none"
 # install some packages needed to set up the container and the dalos SDK in the container
 RUN apt-get update && \
     apt-get install -y sudo \
+    	build-essential \
         make \
         xz-utils \
         python \
@@ -27,8 +28,9 @@ ARG CACHEBUST=1
 
 # fetch SDK installer from server
 ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.0.0-beta.5+snapshot.sh
-#ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.0.0+snapshot.sh
+#ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.1.0+snapshot.sh
 
+# define user name and working directory
 USER buildx
 WORKDIR /home/buildx
 

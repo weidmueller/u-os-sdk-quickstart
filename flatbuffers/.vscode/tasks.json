@@ -1,0 +1,90 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+// mosquitto MQTT library - related tasks
+        {
+            "label": "cmake flatc",
+            "type": "shell",
+            "command": "mkdir -p build_flatc && cd build_flatc && cmake ../flatbuffers -DFLATBUFFERS_BUILD_FLATC=ON -DFLATBUFFERS_BUILD_TESTS=OFF -DFLATBUFFERS_INSTALL=OFF -DFLATBUFFERS_BUILD_FLATLIB=OFF -DFLATBUFFERS_BUILD_FLATHASH=OFF -DFLATBUFFERS_LIBCXX_WITH_CLANG=OFF -DCMAKE_TOOLCHAIN_FILE='../NativeToolchainConfig.cmake'",
+            "problemMatcher": [],
+            "group" : "build"
+        },
+        {
+            "label": "cmake library",
+            "type": "shell",
+            "command": "mkdir -p build && cd build && cmake ../flatbuffers -DFLATBUFFERS_BUILD_FLATC=OFF -DFLATBUFFERS_BUILD_TESTS=OFF -DFLATBUFFERS_INSTALL=ON -DFLATBUFFERS_BUILD_FLATLIB=ON -DFLATBUFFERS_BUILD_FLATHASH=OFF -DFLATBUFFERS_LIBCXX_WITH_CLANG=OFF -DCMAKE_INSTALL_PREFIX=${env:SDKTARGETSYSROOT}/usr",
+//            "command": "mkdir -p build && cd build && cmake .. -DWITH_TLS=OFF -DWITH_STATIC_LIBRARIES=ON -DWITH_LIB_CPP=OFF -DWITH_CJSON=OFF -DWITH_CLIENTS=OFF -DWITH_BROKER=OFF -DWITH_APPS=OFF -DWITH_PLUGINS=OFF -DDOCUMENTATION=OFF -DCMAKE_INSTALL_PREFIX=${env:SDKTARGETSYSROOT}/usr",
+            "problemMatcher": [],
+            "group" : "build",
+            "dependsOn": [
+                "cmake flatc"
+            ]
+        },
+        {
+            "label": "make flatc",
+            "type": "shell",
+            "command": "cd build_flatc && make -j",
+            "problemMatcher": [],
+            "group" : "build"
+        },
+        {
+            "label": "make library",
+            "type": "shell",
+            "command": "cd build && make -j",
+            "problemMatcher": [],
+            "group" : "build",
+            "dependsOn": [
+                "make flatc"
+            ]
+        },
+        {
+            "label": "make install flatc",
+            "type": "shell",
+            "command": "cd build_flatc && mv flatc ${OECORE_NATIVE_SYSROOT}/usr/bin",
+            "problemMatcher": [],
+            "group" : "build"
+        },
+        {
+            "label": "make install library",
+            "type": "shell",
+            "command": "cd build && make install -j",
+            "problemMatcher": [],
+            "group" : "build",
+            "dependsOn" : [
+                "make install flatc"
+            ]
+        },
+        {
+            "label": "make clean flatc",
+            "type": "shell",
+            "command": "cd build_flatc && make clean",
+            "problemMatcher": []
+        },
+        {
+            "label": "make clean library",
+            "type": "shell",
+            "command": "cd build && make clean",
+            "problemMatcher": [],
+            "dependsOn" : [
+                "make clean flatc"
+            ]
+        },
+        {
+            "label": "clean flatc build folder",
+            "type": "shell",
+            "command": "cd build_flatc && rm -r *",
+            "problemMatcher": []
+        },
+        {
+            "label": "clean library build folder",
+            "type": "shell",
+            "command": "cd build && rm -r *",
+            "problemMatcher": [],
+            "dependsOn" : [
+                "clean flatc build folder"
+            ]
+        }
+    ]
+}

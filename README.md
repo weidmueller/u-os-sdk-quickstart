@@ -9,7 +9,7 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Overview:
 
-This example collection demonstrates usage of the C/C++ SDK for the WI UOS on IOT-GW30 and UC20-WL2000.
+This example collection demonstrates usage of the C/C++ SDK for the WI UOS on IOT-GW30 and UC20-WL2000. It is intended for software developers that have experience with Linux application development.
 
 For a basic overview and an introduction to the u-Os SDK installer, see the helloworld [README](helloworld/README.md).
 
@@ -18,9 +18,11 @@ For more advanced examples read on about the VSC workplace folder with the follo
 1. openSSL 3.x
 2. mosquitto
 3. helloworld_mqtt
+4. flatbuffers
 
 The example "helloworld_mqtt" uses the mosquitto MQTT(S) library and the openSSL 3.x library to connect to test.mosquitto.org. After a successful connect, the library sends a small JSON message to a hardcoded topic every 5s.
 It demonstrates usage of the SDK with cmake, usage of the SDK with autotools and how to build c/c++ shared and static libraries and use them in your own c/c++ projects.
+The flatbuffers library is going to be useful for building user applications because some u-Os services use flatbuffers interfaces.
 
 The workplace folder also provides files that configure a build environment in a Docker container. VSC operates Docker for you to create this container and connect to it to use it as a build server.
 
@@ -57,7 +59,9 @@ VSC will run doxygen to generate a html folder in the project. Please navigate t
     
 Now, your project binary for the respective project is ready.
 
-NB: Some projects depend on each other. You need to build openSSL first, then mosquitto and then helloworld_mqtt. Run *make install <name of project\>* in between.
+NB: Some projects depend on each other. You need to build openSSL first, then mosquitto and then helloworld_mqtt. Run *make install <name of project\>* in between. 
+
+For the flatbuffers library, see the [README](flatbuffers/README.md).
 
 ## Debugging on the target device:
 
