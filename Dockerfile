@@ -23,12 +23,13 @@ RUN apt-get update && \
     useradd --create-home --shell /bin/bash buildx && \
     echo "buildx:buildx" | chpasswd && adduser buildx sudo
 
+
 # trigger cache invalidation to force actual reload and (re-)install of the SDK
 ARG CACHEBUST=1
 
 # fetch SDK installer from server
-ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.0.0-beta.5+snapshot.sh
 #ARG SDK_INSTALLER=dalos-glibc-x86_64-meta-toolchain-weidmueller-cortexa9t2hf-neon-ucm-toolchain-2.1.0+snapshot.sh
+ARG SDK_INSTALLER=UC20-WL2000-AC-SDK-debug.sh
 
 # define user name and working directory
 USER buildx
@@ -36,7 +37,7 @@ WORKDIR /home/buildx
 
 #TODO: replace URL of apache on this Ubuntu VM with download location on WI server
 #RUN wget -nv -P/tmp 192.168.76.128/$SDK_INSTALLER
-RUN wget -nv -P/tmp https://github.com/weidmueller/u-os-sdk-quickstart/releases/download/2.0.0-beta.5/$SDK_INSTALLER
+RUN wget -nv -P/tmp https://github.com/weidmueller/u-os-sdk-quickstart/releases/download/1.0.0/$SDK_INSTALLER
 
 # get the CA certificate file for test.mosquitto.org
 RUN wget -nv -P/tmp https://test.mosquitto.org/ssl/mosquitto.org.crt
