@@ -10,11 +10,11 @@
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "linux-gcc-arm",
-            "compilerPath": "${OECORE_NATIVE_SYSROOT}/usr/bin/arm-dalos-linux-gnueabi/arm-dalos-linux-gnueabi-gcc",
+            "compilerPath": "${OECORE_NATIVE_SYSROOT}/usr/bin/aarch64-dalos-linux/aarch64-dalos-linux-gcc",
             "compilerArgs": [
                 "-mfpu=neon",
                 "-mfloat-abi=hard",
-                "-mcpu=cortex-a9",
+                "-mcpu=cortex-a53",
                 "--sysroot=${OECORE_TARGET_SYSROOT}/usr"
             ]
         }

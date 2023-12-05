@@ -6,7 +6,7 @@
         {
             "label": "configure",
             "type": "shell",
-            "command": "mkdir -p build && cd build && ../openssl/Configure linux-generic32 no-shared --prefix=${SDKTARGETSYSROOT}/usr --openssldir=${SDKTARGETSYSROOT}/usr/openssl --cross-compile-prefix=${OECORE_NATIVE_SYSROOT}/usr/bin/arm-dalos-linux-gnueabi/",
+            "command": "mkdir -p build && cd build && ../openssl/Configure linux-aarch64 no-shared --prefix=${SDKTARGETSYSROOT}/usr --openssldir=${SDKTARGETSYSROOT}/usr/openssl --cross-compile-prefix=${OECORE_NATIVE_SYSROOT}/usr/bin/aarch64-dalos-linux/",
             "problemMatcher": [],
             "group": "build"
         },

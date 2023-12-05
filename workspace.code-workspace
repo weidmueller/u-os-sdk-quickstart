@@ -13,8 +13,7 @@
 		},
 		{
 			"path": "./helloworld_mqtt"
-		},
-		{ "path": "./flatbuffers"}
+		}
 	],
 	"settings": {
 		"files.associations": {
@@ -71,7 +70,9 @@
 			"stdexcept": "cpp",
 			"streambuf": "cpp",
 			"cinttypes": "cpp",
-			"typeinfo": "cpp"
+			"typeinfo": "cpp",
+			"unistd.h": "c",
+			"features.h": "c"
 		}
 		}
 }
