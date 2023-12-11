@@ -3,20 +3,21 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
-                "${OECORE_TARGET_SYSROOT}/usr/include"
+                "${OECORE_TARGET_SYSROOT}/usr/include/**"
             ],
-            "defines": [],
+            "defines": [
+                "__LP64__=1"
+            ],
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "linux-gcc-arm64",
-            "compilerPath": "${OECORE_NATIVE_SYSROOT}/usr/bin/aarch64-dalos-linux/aarch64-dalos-linux-gcc",
             "compilerArgs": [
                 "-mfpu=neon",
                 "-mfloat-abi=hard",
-                "-mcpu=cortex-a53",                
-                "--sysroot=${OECORE_TARGET_SYSROOT}/usr"
-            ]
+                "-mcpu=cortex-a53",
+                "--sysroot=${OECORE_TARGET_SYSROOT}/usr/include"
+            ],
+            "compilerPath": ""
         }
     ],
     "version": 4

@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include <signal.h>
 #include <openssl/opensslv.h>
 #include <openssl/crypto.h>
@@ -344,6 +345,8 @@ lCONNECT_AGAIN: /* <-- we jump here if the connection attempt fails because ther
             printf("SIGINT received. Disconnect from the broker, shut down mosquitto and exit..\n");
             /* disconnect from broker */
             iMosqResult = mosquitto_disconnect(pMosq);
+
+            printf("disconnect result is: 0x%x.",iMosqResult);
 
             /* wait 10s for mosquitto to raise the disconnect callback */
             printf("waiting for disconnect..\n");

@@ -4,13 +4,13 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${OECORE_TARGET_SYSROOT}/usr/include"
+                "${OECORE_TARGET_SYSROOT}/usr/include/**",
+                "/home/buildx/sysroots/cortexa72-cortexa53-dalos-linux/usr/include/c++/11.3.0/aarch64-dalos-linux"
             ],
             "defines": [],
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "linux-gcc-arm64",
-            "compilerPath": "${OECORE_NATIVE_SYSROOT}/usr/bin/aarch64-dalos-linux/aarch64-dalos-linux-gcc",
             "compilerArgs": [
                 "-mfpu=neon",
                 "-mfloat-abi=hard",
