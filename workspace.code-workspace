@@ -13,6 +13,9 @@
 		},
 		{
 			"path": "./helloworld_mqtt"
+		},
+		{
+			"path": "./flatbuffers"
 		}
 	],
 	"settings": {
@@ -72,7 +75,20 @@
 			"cinttypes": "cpp",
 			"typeinfo": "cpp",
 			"unistd.h": "c",
-			"features.h": "c"
+			"features.h": "c",
+			"stdbool.h": "c",
+			"cstdbool": "c",
+			"c++config.h": "c",
+			"stubs.h": "c",
+			"opensslv.h": "c",
+			"macros.h": "c",
+			"opensslconf.h": "c",
+			"wordsize.h": "c",
+			"string.h": "c",
+			"stdio.h": "c",
+			"features-time64.h": "c",
+			"timesize.h": "c",
+			"mosquitto.h": "c"
 		}
 		}
 }
