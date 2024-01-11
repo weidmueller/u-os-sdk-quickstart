@@ -14,3 +14,4 @@
 [submodule "flatbuffers/flatbuffers"]
 	path = flatbuffers/flatbuffers
 	url = https://github.com/google/flatbuffers.git
+	branch = a9a295fecf3fbd5a4f571f53b01f63202a3e2113
