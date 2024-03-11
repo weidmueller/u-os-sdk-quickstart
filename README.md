@@ -9,7 +9,7 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Overview:
 
-This example collection demonstrates usage of the C/C++ SDK for the WI UOS on IOT-GW30 and UC20-WL2000. It is intended for software developers that have experience with Linux application development.
+This example collection demonstrates usage of the C/C++ SDK for the WI u-Os devices. It is intended for software developers that have experience with Linux application development.
 
 For a basic overview and an introduction to the u-Os SDK installer, see the helloworld [README](helloworld/README.md).
 
