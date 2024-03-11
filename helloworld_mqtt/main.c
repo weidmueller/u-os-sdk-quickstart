@@ -345,6 +345,8 @@ lCONNECT_AGAIN: /* <-- we jump here if the connection attempt fails because ther
             /* disconnect from broker */
             iMosqResult = mosquitto_disconnect(pMosq);
 
+            printf("disconnect result is: 0x%x.",iMosqResult);
+
             /* wait 10s for mosquitto to raise the disconnect callback */
             printf("waiting for disconnect..\n");
             /* reset the timeout counter */
