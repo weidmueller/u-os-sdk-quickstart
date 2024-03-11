@@ -51,17 +51,16 @@ VSC will run doxygen to generate a html folder in the project. Please navigate t
 
 ## Build instructions
 
-- for the helloworld_mqtt example, read the doxygen documentation in the html folder and build openssl and mosquitto, first.
+Some projects depend on each other. You need to build openSSL first, then mosquitto and then helloworld_mqtt.
 
-- in VSC's menu, use *Terminal -> Run task...* to select and run the following items:
+- in VSC's menu, use *Terminal -> Run task...* to select and run the following items. Replace <name of project\> with the name of each project:
     - *cmake <name of project\>* or *configure <name of project\>*, depending on the project
     - *make <name of project\>*
-    
-Now, your project binary for the respective project is ready.
+    - *make install <name of project\>* only for openSSL and mosquitto, this installs the respective library binaries into the SDK's target sysroot.
 
-NB: Some projects depend on each other. You need to build openSSL first, then mosquitto and then helloworld_mqtt. Run *make install <name of project\>* in between. 
+- for the helloworld_mqtt example, build openssl and mosquitto, first. Also, read the doxygen documentation in the html folder.
 
-For the flatbuffers library, see the [README](flatbuffers/README.md).
+- for the flatbuffers library, see the [README](flatbuffers/README.md).
 
 ## Debugging on the target device:
 
