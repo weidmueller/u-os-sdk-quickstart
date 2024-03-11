@@ -74,13 +74,13 @@
         {
             "label": "clean flatc build folder",
             "type": "shell",
-            "command": "cd build_flatc && rm -r *",
+            "command": "cd build_flatc && rm -rf *",
             "problemMatcher": []
         },
         {
             "label": "clean library build folder",
             "type": "shell",
-            "command": "cd build && rm -r *",
+            "command": "cd build && rm -rf *",
             "problemMatcher": [],
             "dependsOn" : [
                 "clean flatc build folder"
