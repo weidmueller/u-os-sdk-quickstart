@@ -35,8 +35,8 @@ USER buildx
 WORKDIR /home/buildx
 
 #TODO: replace URL of apache on this Ubuntu VM with download location on WI server
-#RUN wget -nv -P/tmp 192.168.76.128/$SDK_INSTALLER
-RUN wget -nv -P/tmp https://github.com/weidmueller/u-os-sdk-quickstart/releases/download/v2.1.0_WL2000-AC/$SDK_INSTALLER
+#RUN wget -nv -P/tmp http://192.168.0.128/$SDK_INSTALLER
+RUN wget -nv -P/tmp https://github.com/weidmueller/u-os-sdk-quickstart/releases/download/v2.1.0_WL2000/$SDK_INSTALLER
 
 # get the CA certificate file for test.mosquitto.org
 RUN wget -nv -P/tmp https://test.mosquitto.org/ssl/mosquitto.org.crt
