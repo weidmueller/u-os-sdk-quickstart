@@ -36,9 +36,7 @@ The workplace folder also provides files that configure a build environment in a
 
 - install the Visual Studio Code Extensions "Dev Containers", "C/C++ Extension Pack" and "Native Debug" in VSC
 
-- in your home folder, get the example with `git clone https://github.com/weidmueller/u-os-sdk-quickstart.git`
-
-- get the submodules with libraries required for the example: `cd ~/u-os-sdk-quickstart && git submodule update --init --remote --rebase`
+- in your home folder, get the example with `git clone --recurse-submodules https://github.com/weidmueller/u-os-sdk-quickstart.git`
 
 - in VSC's menu, go to *File -> Open Workspace from file..* and there open u-os-sdk-quickstart/workspace.code-workspace. Ignore the `compilerPath "${OECORE_NATIVE_SYSROOT}`-related warnings, for now. Click "reopen in container" or proceed to the next step:
 
