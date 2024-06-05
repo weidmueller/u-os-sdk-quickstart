@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include <signal.h>
 #include <openssl/opensslv.h>
 #include <openssl/crypto.h>

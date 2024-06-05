@@ -1,0 +1,48 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.234.0/containers/cpp
+{
+	"name": "DALOS-SDK 64-bit",
+	"build": {
+		"dockerfile": "../../Dockerfile",
+		"target": "armv8"
+	},
+	"runArgs": ["--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"],
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": {},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cpptools",
+				"ms-vscode.cmake-tools",
+				"maelvalais.autoconf",
+				"ms-vscode.cpptools-extension-pack",
+				"webfreak.debug"
+			],
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+						"C_Cpp.default.defines" : [
+													"__x86_64__=1",
+													"__LP64__=1",
+													"__aarch64__=1"
+						],
+						"C_Cpp.intelliSenseEngine": "Tag Parser",
+						"C_Cpp.default.intelliSenseMode": "linux-gcc-arm64",
+						"C_Cpp.default.compilerPath": "${OECORE_NATIVE_SYSROOT}/usr/bin/aarch64-dalos-linux/aarch64-dalos-linux-gcc",
+						"C_Cpp.default.compilerArgs": [
+							"-mfpu=neon",
+							"-mfloat-abi=hard",
+							"-mcpu=cortex-a53",
+							"--sysroot=${OECORE_TARGET_SYSROOT}/usr"
+						]
+			}
+		}
+	},
+
+	"remoteUser": "buildx",
+
+	// let VSC fire up a bash shell that reads a .bashrc from /root when the container starts up.
+	"userEnvProbe": "loginInteractiveShell",
+}
