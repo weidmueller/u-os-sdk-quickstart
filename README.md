@@ -24,7 +24,7 @@ The example "helloworld_mqtt" uses the mosquitto MQTT(S) library and the openSSL
 It demonstrates usage of the SDK with cmake, usage of the SDK with autotools and how to build c/c++ shared and static libraries and use them in your own c/c++ projects.
 The flatbuffers library is going to be useful for building user applications because some u-Os services use flatbuffers interfaces.
 
-The workplace folder also provides files that configure a build environment in a Docker container. VSC operates Docker for you to create this container and connect to it to use it as a build server.
+The workplace folder also provides files that configure a build environment in one of two Docker containers. VSC operates Docker for you to create the appropriate container and connect to it to use it as a build server. One container is for the ARM 32 bit u-Os device UC20-WL2000-AC and the other is for the ARM 64-bit devices UC20-M3000 and UC20-M4000.
 
 ## How to prepare the build environment:
 
@@ -42,7 +42,7 @@ The workplace folder also provides files that configure a build environment in a
 
 - in VSC's menu, go to *File -> Open Workspace from file..* and there open u-os-sdk-quickstart/workspace.code-workspace. Ignore the `compilerPath "${OECORE_NATIVE_SYSROOT}`-related warnings, for now. Click "reopen in container" or proceed to the next step:
 
-- in VSC's left corner of the lower status bar, use the green >< "Open a remote window" button and select "Reopen in container". The first time you do this, VSC lets docker create the container from scratch, so be patient. Hint: in the container, your user is buildx with the sudo password buildx.
+- in VSC's left corner of the lower status bar, use the green >< "Open a remote window" button and select "Reopen in container". Select the container fitting your device's architecture. The first time you do this, VSC lets docker create the container from scratch, so be patient. Hint: in the container, your user is buildx with the sudo password buildx.
 
 ## Documentation
 Each project has doxygen documentation that explains it from a higher level down to the details. 
@@ -54,7 +54,7 @@ VSC will run doxygen to generate a html folder in the project. Please navigate t
 Some projects depend on each other. You need to build openSSL first, then mosquitto and then helloworld_mqtt.
 
 - in VSC's menu, use *Terminal -> Run task...* to select and run the following items. Replace <name of project\> with the name of each project:
-    - *cmake <name of project\>* or *configure <name of project\>*, depending on the project
+    - *cmake <name of project\>* or *configure for <architecture> <name of project\>*, depending on the project
     - *make <name of project\>*
     - *make install <name of project\>* only for openSSL and mosquitto, this installs the respective library binaries into the SDK's target sysroot.
 

@@ -5,7 +5,7 @@ This VSC project assists software developers in linking their applications again
 WI has added a flatbuffers VSC project to the u-os-sdk-quickstart repository because some u-Os services use flatbuffers format for their API.
 Flatbuffers projects may require usage of the flatc compiler to generate c/c++ headers from your schema files. The flatc compiler needs to run - well - at compile time and 
 therefore on your host x86 architecture. On the other hand, you want to run your application on the target device which has armhf architecture. Therefore, you need the flatbuffers
-library to be compiled for armhf. Because is a bit tricky to achive mixed target compilation, WI has prepared some VSC tasks and a toolchain config cmake file for you.
+library to be compiled for your device's architecture. Because is a bit tricky to achive mixed target compilation, WI has prepared some VSC tasks and a toolchain config cmake file for you.
 
 ## Build instructions
 
