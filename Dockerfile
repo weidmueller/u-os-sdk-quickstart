@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM debian:bullseye AS intermediate
+FROM debian:latest AS intermediate
 
 ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="none"
 
@@ -13,12 +13,13 @@ RUN apt-get update && \
     	build-essential \
         make \
         xz-utils \
-        python \
+        python3 \
         wget \
         iputils-ping \
         openssh-client \
         graphviz \
         doxygen \
+        file \
         perl && \
     useradd --create-home --shell /bin/bash buildx && \
     echo "buildx:buildx" | chpasswd && adduser buildx sudo
@@ -42,13 +43,13 @@ ARG SDK_INSTALLER="UC20-WL2000-AC-SDK-2.1.0.sh"
 ADD --chmod=775 --chown=buildx:buildx https://github.com/weidmueller/u-os-sdk-quickstart/releases/download/v2.1.0_WL2000/$SDK_INSTALLER /tmp
 
 # run SDK installer, we install to default path and say "yes" to all questions
-RUN /tmp/$SDK_INSTALLER -y -d /home/buildx
+ RUN /tmp/$SDK_INSTALLER -y -d /home/buildx
 
 # delete the SDK installer after the sdk installation has finished.
-RUN rm -r /tmp/$SDK_INSTALLER
+ RUN rm -r /tmp/$SDK_INSTALLER
 
 # the .bashrc of user buildx we source the environment setup script of the SDK.
-RUN echo "\n#initialize SDK environment variables\nsource /home/buildx/env*\n" >> /home/buildx/.bashrc
+ RUN echo "\n#initialize SDK environment variables\nsource /home/buildx/env*\n" >> /home/buildx/.bashrc
 
 
 FROM intermediate AS armv8
