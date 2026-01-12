@@ -20,7 +20,8 @@ RUN apt-get update && \
         graphviz \
         doxygen \
         file \
-        perl && \
+        perl \
+        bc && \
     useradd --create-home --shell /bin/bash buildx && \
     echo "buildx:buildx" | chpasswd && adduser buildx sudo
 
@@ -37,10 +38,12 @@ FROM intermediate AS armv7
 # trigger cache invalidation to force actual reload and (re-)install of the SDK
 ARG CACHEBUST=1
 
-ARG SDK_INSTALLER="UC20-WL2000-AC-SDK-2.1.0.sh"
+ARG SDK_INSTALLER_VERSION="2.5.0"
+ARG SDK_INSTALLER_PREFIX="UC20-WL2000-AC-SDK-"
+ARG SDK_INSTALLER=$SDK_INSTALLER_PREFIX$SDK_INSTALLER_VERSION".sh"
 
 # download SDK installer from WI's github
-ADD --chmod=775 --chown=buildx:buildx https://github.com/weidmueller/u-os-sdk-quickstart/releases/download/v2.1.0_WL2000/$SDK_INSTALLER /tmp
+ADD --chmod=775 --chown=buildx:buildx https://github.com/weidmueller/u-os-sdk-quickstart/releases/download/v${SDK_INSTALLER_VERSION}_WL2000/$SDK_INSTALLER /tmp
 
 # run SDK installer, we install to default path and say "yes" to all questions
  RUN /tmp/$SDK_INSTALLER -y -d /home/buildx
@@ -51,15 +54,19 @@ ADD --chmod=775 --chown=buildx:buildx https://github.com/weidmueller/u-os-sdk-qu
 # the .bashrc of user buildx we source the environment setup script of the SDK.
  RUN echo "\n#initialize SDK environment variables\nsource /home/buildx/env*\n" >> /home/buildx/.bashrc
 
+# additionally, initialize KERNEL_SRC in environment
+RUN  echo "#initialize KERNEL_SRC in SDK environment\nexport KERNEL_SRC=\$OECORE_TARGET_SYSROOT/usr/src/kernel\n" >> /home/buildx/.bashrc
 
 FROM intermediate AS armv8
 # trigger cache invalidation to force actual reload and (re-)install of the SDK
 ARG CACHEBUST=1
 
-ARG SDK_INSTALLER="UC20-M3000-M4000-SDK-2.1.0.sh"
+ARG SDK_INSTALLER_VERSION="2.5.0"
+ARG SDK_INSTALLER_PREFIX="UC20-M3000-M4000-SDK-"
+ARG SDK_INSTALLER=$SDK_INSTALLER_PREFIX$SDK_INSTALLER_VERSION".sh"
 
 # download SDK installer from WI's github
-ADD --chmod=755 --chown=buildx:buildx https://github.com/weidmueller/u-os-sdk-quickstart/releases/download/2.1.0/$SDK_INSTALLER /tmp
+ADD --chmod=775 --chown=buildx:buildx https://github.com/weidmueller/u-os-sdk-quickstart/releases/download/v${SDK_INSTALLER_VERSION}/$SDK_INSTALLER /tmp
 
 # run SDK installer, we install to default path and say "yes" to all questions
 RUN /tmp/$SDK_INSTALLER -y -d /home/buildx
@@ -67,6 +74,8 @@ RUN /tmp/$SDK_INSTALLER -y -d /home/buildx
 # delete the SDK installer after the sdk installation has finished.
 RUN rm -r /tmp/$SDK_INSTALLER
 
-# the .bashrc of user buildx we source the environment setup script of the SDK.
+#In the .bashrc of user buildx we source the environment setup script of the SDK.
 RUN echo "\n#initialize SDK environment variables\nsource /home/buildx/env*\n" >> /home/buildx/.bashrc
 
+# additionally, initialize KERNEL_SRC in environment
+RUN  echo "#initialize KERNEL_SRC in SDK environment\nexport KERNEL_SRC=\$OECORE_TARGET_SYSROOT/usr/src/kernel\n" >> /home/buildx/.bashrc
