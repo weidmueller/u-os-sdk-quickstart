@@ -13,6 +13,8 @@ This example collection demonstrates usage of the C/C++ SDK for the WI u-Os devi
 
 For a basic overview and an introduction to the u-Os SDK installer, see the helloworld [README](helloworld/README.md).
 
+For kernel module development, see the kernel module [README](u-os-kernel-dev/README.md).
+
 For more advanced examples read on about the VSC workplace folder with the following projects in it:
 
 1. openSSL 3.x
