@@ -11,7 +11,11 @@
 	path = mosquitto/mosquitto
 	url = https://github.com/eclipse-mosquitto/mosquitto.git
 	branch = master
+[submodule "cjson/cjson"]
+	path = cjson/cjson
+	url = https://github.com/DaveGamble/cJSON.git
+	branch = master
 [submodule "flatbuffers/flatbuffers"]
 	path = flatbuffers/flatbuffers
 	url = https://github.com/google/flatbuffers.git
-	branch = a9a295fecf3fbd5a4f571f53b01f63202a3e2113
+#	branch = a9a295fecf3fbd5a4f571f53b01f63202a3e2113
