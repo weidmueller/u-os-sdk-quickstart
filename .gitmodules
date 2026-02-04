@@ -9,7 +9,7 @@
 	branch = master
 [submodule "mosquitto/mosquitto"]
 	path = mosquitto/mosquitto
-	url = https://github.com/eclipse/mosquitto.git
+	url = https://github.com/eclipse-mosquitto/mosquitto.git
 	branch = master
 [submodule "flatbuffers/flatbuffers"]
 	path = flatbuffers/flatbuffers
