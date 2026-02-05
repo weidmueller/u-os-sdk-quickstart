@@ -16,10 +16,25 @@
             "command": "mkdir -p build && cd build && ../openssl/Configure linux-aarch64 no-shared --prefix=${SDKTARGETSYSROOT}/usr --openssldir=${SDKTARGETSYSROOT}/usr/openssl --cross-compile-prefix=${OECORE_NATIVE_SYSROOT}/usr/bin/aarch64-dalos-linux/",
             "problemMatcher": [],
             "group": "build"
-        },        {
+        },
+        {
+            "label": "configure for x86-64",
+            "type": "shell",
+            "command": "mkdir -p build && cd build && ../openssl/Configure linux-${OECORE_TARGET_ARCH} no-shared --prefix=${SDKTARGETSYSROOT}/usr --openssldir=${SDKTARGETSYSROOT}/usr/openssl --cross-compile-prefix=${OECORE_NATIVE_SYSROOT}/usr/bin/${OECORE_TARGET_ARCH}-dalos-linux/",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
             "label": "make",
             "type": "shell",
             "command": "cd build && make -j",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "make test",
+            "type": "shell",
+            "command": "cd build && make test -j",
             "problemMatcher": [],
             "group": "build"
         },

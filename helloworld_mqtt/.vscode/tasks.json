@@ -14,6 +14,7 @@
         {
             "label": "make",
             "type": "shell",
+//            "command": "cd build && make -j LDFLAGS=\"-L${env:SDKTARGETSYSROOT}/usr/lib64/  -Wl,-rpath,${env:SDKTARGETSYSROOT}/usr/lib64/\"",
             "command": "cd build && make -j",
             "problemMatcher": [],
             "group" : "build"
