@@ -50,6 +50,7 @@ ARG SDK_INSTALLER=$SDK_INSTALLER_PREFIX$SDK_INSTALLER_VERSION".sh"
 # download SDK installer from WI's github
 ADD --chmod=775 --chown=buildx:buildx http://127.0.0.1/sdk_2.5.0_ucm_snapshot.sh /tmp
 #ADD --chmod=775 --chown=buildx:buildx https://github.com/weidmueller/u-os-sdk-quickstart/releases/download/v${SDK_INSTALLER_VERSION}_WL2000/$SDK_INSTALLER /tmp
+
 ARG SDK_INSTALLER="sdk_2.5.0_ucm_snapshot.sh"
 
 # run SDK installer, we install to default path and say "yes" to all questions
@@ -98,18 +99,9 @@ ARG SDK_INSTALLER_VERSION="2.5.0"
 ARG SDK_INSTALLER_PREFIX="UC20-S5000-SDK-"
 ARG SDK_INSTALLER=$SDK_INSTALLER_PREFIX$SDK_INSTALLER_VERSION".sh"
 
-# download SDK installer from WI's github
-#ADD --chmod=775 --chown=buildx:buildx https://github.com/weidmueller/u-os-sdk-quickstart/releases/download/v${SDK_INSTALLER_VERSION}/$SDK_INSTALLER /tmp
-
-# remove the following two lines before committing - they are just for testing by download from local apache server 
-ADD --chmod=775 --chown=buildx:buildx http://127.0.0.1/U-OS-X86-64-SDK-debug.sh /tmp
-ARG SDK_INSTALLER="U-OS-X86-64-SDK-debug.sh"
-
-# run SDK installer, we install to default path and say "yes" to all questions
-RUN /tmp/$SDK_INSTALLER -y -d /home/buildx
-
-# delete the SDK installer after the sdk installation has finished.
-RUN rm -r /tmp/$SDK_INSTALLER
+# install SDK into container
+RUN --mount=type=bind,source=U-OS-X86-64-SDK-debug.sh,target=/tmp/U-OS-X86-64-SDK-debug.sh \
+    /tmp/U-OS-X86-64-SDK-debug.sh -y -d /home/buildx
 
 #In the .bashrc of user buildx we source the environment setup script of the SDK.
 RUN echo "\n#initialize SDK environment variables\nsource /home/buildx/env*\n" >> /home/buildx/.bashrc

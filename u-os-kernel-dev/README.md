@@ -1,6 +1,6 @@
-# u-OS 2.5.0 Kernel sources for IOT-GW (ucg), M3000, M4000 (ucu) and WL2000 (ucm)
+# u-OS 2.7.0 Kernel sources for IOT-GW (ucg), M3000, M4000 (ucu) and WL2000 (ucm)
 
-From u-OS 2.5.0 on, the SDK installer includes the following components:
+From u-OS 2.7.0 on, the SDK installer includes the following components:
 
 - kernel sources including configuration and patches
 - toolchain including cross compiler
@@ -58,7 +58,7 @@ execute the following commands:
     $ make
 
 This creates the kernel module `hello.ko` in the current folder. This file is a hello-world-like kernel module.
-To test on the device, copy it to the device e.g. via scp and load it via insmod. Follow the commands below:
+To test on the device, copy it to the device e.g. via scp and load it via insmod. Follow the commands below. Note: you may have to adapt the ip address to what's set up on your device.
 
     $ scp hello.ko admin@192.168.0.101:/tmp
     $ ssh admin@192.168.0.101
