@@ -73,7 +73,7 @@ ARG SDK_INSTALLER=$SDK_INSTALLER_PREFIX$SDK_INSTALLER_VERSION".sh"
 
 # download SDK installer from WI's github
 #ADD --chmod=775 --chown=buildx:buildx http://127.0.0.1/sdk_2.5.0_snapshot.sh /tmp
-ADD --chmod=775 --chown=buildx:buildx https://github.com/weidmueller/u-os-sdk-quickstart/releases/download/v${SDK_INSTALLER_VERSION}/$SDK_INSTALLER /tmp
+ADD --chmod=775 --chown=buildx:buildx https://github.com/weidmueller/u-os-sdk-quickstart/releases/download/v${SDK_INSTALLER_VERSION}_M4k/$SDK_INSTALLER /tmp
 
 # run SDK installer, we install to default path and say "yes" to all questions
 RUN /tmp/$SDK_INSTALLER -y -d /home/buildx
